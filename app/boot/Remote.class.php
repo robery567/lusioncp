@@ -60,7 +60,7 @@
 	}
 
 	public function uptime() {
-		return $this->ssh->exec('uptime | cut -c 13-18');
+		return $this->ssh->exec('uptime | cut -c 13-17');
 	}
 
 	public function ramMemory() {
@@ -74,10 +74,15 @@
 				return $used . '/' . $free . ' din ' . $total;
 				break;
 			case 'FreeBSD':
-				
+				return false;
 				break;
 			default:
 				break;
 		}
+	}
+
+	public function cpuUsage() {
+		
+	}
 	}
  }
