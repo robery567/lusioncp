@@ -128,7 +128,7 @@
 											<td><?= $remote->uptime() ?></td>
 											<td><b><font color="red">100%</font></td>
 											 <td><b><font color="orange">58%</font></td>
-											<td><font color="grey">2GB used</font></td>
+											<td><font color="grey"><?= $remote->ramMemory() ?></font></td>
 											<td><b><font color="green"><?= $remote->freeSpace() ?>/ <?= $remote->totalSpace() ?></font></td>
 											 
 										</tr>

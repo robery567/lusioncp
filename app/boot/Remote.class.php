@@ -62,4 +62,16 @@
 	public function uptime() {
 		return $this->ssh->exec('uptime | cut -c 13-18');
 	}
+
+	public function ramMemory() {
+		$kernel = $this->ssh->exec('uname -s');
+
+		switch($kernel) {
+			case 'Linux':
+				$used = $this->ssh->exec('free | grep Mem | awk \'{print $3/$2 * 100.0}\'');
+				$free = $this->ssh->exec('free | grep Mem | awk \'{print $4/$2 * 100.0}\'');
+				$total = $this->ssh->exec('free | grep Mem | awk \'{print $1}\'');
+				return $used . '/' . $free . ' din ' . $total;
+		}
+	}
  }
