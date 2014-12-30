@@ -72,6 +72,12 @@
 				$free = $this->ssh->exec('free | grep Mem | awk \'{print $4/$2 * 100.0}\'');
 				$total = $this->ssh->exec('free | grep Mem | awk \'{print $1}\'');
 				return $used . '/' . $free . ' din ' . $total;
+				break;
+			case 'FreeBSD':
+				
+				break;
+			default:
+				break;
 		}
 	}
  }
