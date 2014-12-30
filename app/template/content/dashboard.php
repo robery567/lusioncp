@@ -125,11 +125,11 @@
 										<tr>
 											<td>1</td>
 											<td><b><font color="green"><?php echo server_ip($_SESSION['username'], $DB); ?></font></td>
-											<td>2z 48h 53s</td>
+											<td><?= $remote->uptime() ?></td>
 											<td><b><font color="red">100%</font></td>
 											 <td><b><font color="orange">58%</font></td>
 											<td><font color="grey">2GB used</font></td>
-											<td><b><font color="green"><?php echo $remote->freeSpace()."/".$remote->totalSpace(); ?></font></td>
+											<td><b><font color="green"><?= $remote->freeSpace() ?>/ <?= $remote->totalSpace() ?></font></td>
 											 
 										</tr>
 										<tr>

@@ -58,4 +58,8 @@
 				break;
 		}
 	}
+
+	public function uptime() {
+		return $this->ssh->exec('uptime | cut -c 13-18');
+	}
  }
