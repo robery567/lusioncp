@@ -124,7 +124,7 @@
 									<tbody>
 										<tr>
 											<td>1</td>
-											<td><b><font color="green"><?php echo server_ip($_SESSION['username'], $DB); ?></font></td>
+											<td><b><font color="green"><?= server_ip($_SESSION['username'], $DB) ?></font></td>
 											<td><?= $remote->uptime() ?></td>
 											<td><b><font color="red">100%</font></td>
 											 <td><b><font color="orange">58%</font></td>
