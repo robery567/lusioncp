@@ -32,9 +32,11 @@ function is_ipinstalled($ip, $DB) {
 }
 
 function update_status($ip, $status) { // @PARAM : IP (SERVER_IP), STATUS(0/1)
-    $DB->query("UPDATE lcpc_clients SET is_installed=1 WHERE server_ip='{$ip}'");
+	global $DB, $db;
+	$DB->query("UPDATE lcpc_clients SET is_installed=1 WHERE server_ip='{$ip}'");
 }
 
 function update_procent($ip, $procent) {
-    $DB->query("UPDATE lcpc_clients SET install_procent='{$procent}' WHERE server_ip='{$ip}'");
+	global $DB, $db;
+	$DB->query("UPDATE lcpc_clients SET install_procent='{$procent}' WHERE server_ip='{$ip}'");
 }
