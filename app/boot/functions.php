@@ -17,14 +17,7 @@ function server_ip($username, $DB) {
 	return $data[0];
 }
 
-// function taken from freebsd-memory -- List Total System Memory Usage
-function mem_rounded($mem_size) {
-	$chip_size = 1;
-	$chip_guess = ($mem_size/8)-1;
-	while($chip_guess != 0) {
-		$chip_guess += 1;
-		$chip_size -= 1;
-	}
-	$mem_round = ((int) ($mem_size / $chip_size) +1) * $chip_size;
-	return $mem_round;
+function is_installed($ip, $DB) {
+    $data = $DB->query("SELECT is_installed AS response FROM lcpc_clients")->fetch_array(MYSQLI_ASSOC);
+    return $data['response'];
 }
