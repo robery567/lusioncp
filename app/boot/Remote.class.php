@@ -63,7 +63,7 @@
 		return $this->ssh->exec('uptime | cut -c 13-17');
 	}
 
-	public function ramMemory() {
+ 	public function ramMemory() {
 		$kernel = $this->ssh->exec('uname -s');
 
 		switch($kernel) {
@@ -74,30 +74,16 @@
 				return $used . '/' . $free . ' din ' . $total . ' MB';
 				break;
 			case 'FreeBSD':
-				$mem_hw 		= mem_rounded($this->ssh->exec('sysctl hw.physmem'));
-				$mem_phys 		= $this->ssh->exec('sysctl hw.physmem');
-				$mem_all 		= $this->ssh->exec('sysctl wm.stats.vm.v_page_count') 		* $this->ssh->exec('sysctl hw.pagesize');
-				$mem_wire 		= $this->ssh->exec('sysctl wm.stats.vm.v_wire_count') 		* $this->ssh->exec('sysctl hw.pagesize');
-				$mem_active 	= $this->ssh->exec('sysctl vm.stats.vm.v_active_count') 	* $this->ssh->exec('sysctl hw.pagesize');
-				$mem_inactive 	= $this->ssh->exec('sysctl vm.stats.vm.v_inactive_count') 	* $this->ssh->exec('sysctl hw.pagesize');
-				$mem_cache 		= $this->ssh->exec('sysctl vm.stats.vm_v_cache_count') 		* $this->ssh->exec('sysctl hw.pagesize');
-				$mem_free 		= $this->ssh->exec('sysctl vm.stats.vm_v_free_count') 		* $this->ssh->exec('sysctl hw.pagesize');
-
-				$mem_gap_vm    = $mem_all - ($mem_wire + $mem_active + $mem_inactive + $mem_cache + $mem_free);
-				$mem_gap_sys   = $mem_phys - $mem_all;
-				$mem_gap_hw    = $mem_hw   - $mem_phys;
-
-				$mem_total = $mem_hw;
-				$mem_avail = $mem_inactive + $mem_cache + $mem_free;
-				$mem_used  = $mem_total - $mem_avail;
-				
-				$free = ($mem_inactive + $mem_cache + $mem_free)/$mem_total*100.0;
-				$used  = ($mem_total - $mem_avail)/$mem_total*100.0;
-				$total = $mem_total/1024*1024;
-
-				return $used . '/' . $free . ' din ' . $total . ' MB';
+				$used = $this->ssh->exec('free | grep mem_used | cut -c 43-45');
+				$avail = $this->ssh->exec('free | grep mem_avail | cut -c 43-45');
+				$total = $this->ssh->exec('free | grep mem_total | cut -c 34-39');
+				return $used . ' / ' . $avail . ' (Total: ' . $total;
 				break;
 			default:
+				$used = $this->ssh->exec('free | grep mem_used | cut -c 43-45');
+				$avail = $this->ssh->exec('free | grep mem_avail | cut -c 43-45');
+				$total = $this->ssh->exec('free | grep mem_total | cut -c 34-39');
+				return $used . ' / ' . $avail . ' (Total: ' . $total;
 				break;
 		}
 	}
