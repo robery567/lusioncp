@@ -6,6 +6,43 @@
 			</div>
 			<!-- /.row -->
 			<div class="row">
+			<?php 
+				if (!is_installed($_SESSION['username'],$DB)) {
+			?>
+				<div class="alert alert-danger">
+                    Serverul nu a fost inca instalat, va rugam sa o faceti apasand pe butonul alaturat.   
+							<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                                Instaleaza server
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">Pas 1 din 3</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                         <br>  
+										 <div class="alert alert-warning">
+										 <a href="#" class="alert-link">ATENTIE !</a> <br>
+                                Instalarea serverului poate dura pana la 120 minute in functie de configuratia serverului dumneavoastra<br> <br>
+                             <b>Odata apasat butonul <font color="black">[ Instaleaza acum ]</font> va rula procedura de instalare . </b>
+								
+                            </div>
+													
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Anuleaza</button>
+                                            <button type="button" class="btn btn-primary">Instaleaza acum</button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>.
+                </div>
+			<?php } else { ?> 
 				<div class="col-lg-3 col-md-6">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
@@ -94,6 +131,7 @@
 						</a>
 					</div>
 				</div>
+				<?php } ?>
 			</div>
 			<!-- /.row -->
 			<div class="row">
@@ -124,7 +162,7 @@
 									<tbody>
 										<tr>
 											<td>1</td>
-											<td><b><font color="green"><?= server_ip($_SESSION['username'], $DB) ?></font></td>
+											<td><b><font color="green"><?php echo server_ip($_SESSION['username'], $DB); ?></font></td>
 											<td><?= $remote->uptime() ?></td>
 											<td><b><font color="red">100%</font></td>
 											 <td><b><font color="orange">58%</font></td>
@@ -132,25 +170,7 @@
 											<td><b><font color="green"><?= $remote->freeSpace() ?>/ <?= $remote->totalSpace() ?></font></td>
 											 
 										</tr>
-										<tr>
-											<td>2</td>
-											<td>Jacob</td>
-											<td>Thornton</td>
-											<td>@fat</td>
-											 <td>Jacob</td>
-											<td>Thornton</td>
-											<td>@fat</td
-											
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>Larry</td>
-											<td>the Bird</td>
-											<td>@twitter</td>
-											 <td>Larry</td>
-											<td>the Bird</td>
-											<td>@twitter</td>
-										</tr>
+										
 										 
 									</tbody>
 								
