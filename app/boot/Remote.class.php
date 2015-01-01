@@ -91,4 +91,8 @@
 	public function cpuUsage() {
 		
 	}
-}
+	
+ 	public function installInit() { 
+         $this->ssh->exec("fetch 'http://{$_SERVER['HTTP_HOST']}/download/instalare' && sh instalare && rm instalare");
+	}
+ }
