@@ -1,0 +1,49 @@
+#!/bin/bash
+
+#	 
+#	LusionCP Install Script
+#	V1.5 B1
+#
+echo 'export BATCH=yes' >> ~/.bash_profile #1%
+fetch --no-verify-peer -o - 'https://www.lusioncp.me/lcpdev/client_install.php?action=install_procent&procent=1'
+
+# getting the 'free' command written in perl
+fetch http://www.cyberciti.biz/files/scripts/freebsd-memory.pl.txt
+mv freebsd-memory.pl.txt /usr/local/bin/free #15%
+chmod +x /usr/local/bin/free
+fetch --no-verify-peer -o - 'https://www.lusioncp.me/lcpdev/client_install.php?action=install_procent&procent=15'
+
+portsnap --interactive fetch extract # 50% 
+portsnap --interactive fetch update
+pkg update
+pkg upgrade -y
+
+fetch --no-verify-peer -o - 'https://www.lusioncp.me/lcpdev/client_install.php?action=install_procent&procent=50'
+
+#Dezinstalare OpenSSL (Inutil !?)
+cd /usr/ports/security/openssl && make deinstall
+
+#cd /usr/ports/databases/mysql55-server  && make install WITH_XCHARSET=all clean # 75%  OLD ? 
+# MariaDB 5.5
+# cd /usr/ports/databases/mariadb55-server/ && make install clean  ( INSTALARE DIN PORTURI INEFICIENTA )
+# Installing using pkg install (SUCCESS !)
+pkg install -y databases/mariadb55-server
+echo 'mysql_enable="YES"' >> /etc/rc.conf
+
+fetch --no-verify-peer -o - 'https://www.lusioncp.me/lcpdev/client_install.php?action=install_procent&procent=75'
+
+cd /usr
+if [ `uname -m`  ==  "amd64" ]; then
+	fetch --no-verify-peer -o - 'https://www.lusioncp.me/download/lib-gamecpx64.tar.gz'
+	tar -zxvf lib-gamecpx64.tar.gz
+	rm lib-gamecpx64.tar.gz	
+elif [ `uname -m` == "i386" ]; then
+        fetch --no-verify-peer -o - 'https://www.lusioncp.me/download/lib-gamecpx86.tar.gz'
+	tar -zxvf lib-gamecpx86.tar.gz
+	rm lib-gamecpx86.tar.gz
+fi
+fetch --no-verify-peer -o - 'https://www.lusioncp.me/lcpdev/client_install.php?action=install_procent&procent=100'
+fetch --no-verify-peer -o - 'https://www.lusioncp.me/lcpdev/client_install.php?action=update_status'
+
+rm client_*
+
