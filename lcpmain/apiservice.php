@@ -133,6 +133,34 @@ switch($action) {
 			echo $client['credits'];
 	break;
 	
+	case 'add_license':
+		$get_key = isset($_GET['key']) ? sanitize($_GET['key']) : 'invalid';
+		$check_key = $db2->query("SELECT credits,user_id
+									FROM lcpa_clients 
+									WHERE license = '{$get_key}' 
+								");
+		$client = $check_key->fetch_array(MYSQLI_ASSOC);
+
+		if($check_key->num_rows) {
+			$license_key 		= isset($_GET['license_key']) ? sanitize($_GET['license_key']) ? NULL;;
+			$license_ip 		= isset($_GET['license_ip']) ? sanitize($_GET['license_ip']) ? NULL;
+			if (!is_null($license) && !is_null($license_ip)) { 
+				$db2->query("UPDATE lcpa_clients SET credits=credits-2 WHERE license = '{$get_key}'");
+				$db2->query("INSERT INTO lcpa_license (company_id, license_ip, license_key, license_startdate, license_expiry) 
+													VALUES (
+															'{$client['user_id']}',
+															'{$license_ip}',
+															'{$license_key}', 
+															CURDATE(), 
+															DATE_ADD(CURDATE(), INTERVAL 30 DAY)
+														)"
+							);
+			} else {
+				echo 'invalid_request';
+			}
+		}
+	break;
+	
 	default:
 		echo 'invalid action';
 		
