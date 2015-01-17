@@ -51,11 +51,16 @@ class Remote {
 	}
 
 	public function cpuUsage() {
-    $cpus = $this->ssh->exec('sysctl hw.ncpu');
-    for($i = 1; $i <= $cpus; $i++) {
-      $cpu += $this->ssh->exec("sysctl dev.cpu.{$i}.cx_usage");
+    (int) $cpuCount = $this->ssh->exec('sysctl hw.ncpu | cut -c 10-11');
+    if($cpuCount != 1) {
+      return $this->ssh->exec('sysctl dev.cpu.0.cx_usage | cut -c 21-27');
+    } else {
+      for($i = 1; $i <= $cpuCount; $i++) {
+        $cpuUsage += $this->ssh->exec("sysctl dev.cpu.{$i}.cx_usage | cut -c 21-26");
+      }
+      return $cpuUsage / $cpuCount;
     }
-    return $cpu / $cpus;
+    #return $cpuUsage;
 	}
 
 	public function installInit() {
