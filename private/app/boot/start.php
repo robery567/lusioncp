@@ -57,7 +57,8 @@ if(isset($_SESSION['email'])) {
 			server_ip AS ip,
 			server_port AS port ,
 			server_username AS username,
-			server_password AS password
+			server_password AS password,
+			clearance
 		FROM
 			lcpc_clients
 		WHERE

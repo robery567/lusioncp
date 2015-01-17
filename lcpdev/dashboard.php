@@ -5,6 +5,10 @@ if (!isset($_SESSION['email']) && empty($_SESSION['email'])) {
 	redirect('index.php');
 }
 
+if($data['clearance'] == 3) {
+	redirect('mentor.php');
+}
+
 ?>
 
 <!DOCTYPE html>
