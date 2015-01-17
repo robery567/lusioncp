@@ -170,8 +170,8 @@ switch($action) {
 		$client = $check_key->fetch_array(MYSQLI_ASSOC);
 
 		if($check_key->num_rows) {
-			$license_key 		= isset($_GET['license_key']) ? sanitize($_GET['license_key']) ? NULL;;
-			$license_ip 		= isset($_GET['license_ip']) ? sanitize($_GET['license_ip']) ? NULL;
+			$license_key 		= isset($_GET['license_key']) ? sanitize($_GET['license_key']) ? null;
+			$license_ip 		= isset($_GET['license_ip']) ? sanitize($_GET['license_ip']) ? null;
 			if (!is_null($license) && !is_null($license_ip)) {
         $query = [
           "
