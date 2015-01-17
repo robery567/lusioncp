@@ -48,11 +48,11 @@ if(isset($_SESSION['email'])) {
 						];
 
 						$query = "
-							SELECT 
-								`password` 
-							FROM 
-								`lcpc_clients` 
-							WHERE 
+							SELECT
+								`password`
+							FROM
+								`lcpc_clients`
+							WHERE
 								`email` = '{$data['usermail']}';
 						";
 
@@ -66,7 +66,8 @@ if(isset($_SESSION['email'])) {
 										`user_id`,
 										`username`,
 										`email`,
-										`server_ip`
+										`server_ip`,
+										`clearance`
 									FROM
 										`lcpc_clients`
 									WHERE
@@ -76,7 +77,7 @@ if(isset($_SESSION['email'])) {
 								$statement = $db->prepare($query);
 								$statement->bind_param('s', $data['usermail']);
 								$statement->execute();
-								$statement->bind_result($r_id, $r_username, $r_email, $r_ip);
+								$statement->bind_result($r_id, $r_username, $r_email, $r_ip, $r_lvl);
 
 								$statement->fetch();
 								$_SESSION['user_id'] 		= $r_id;
@@ -84,7 +85,11 @@ if(isset($_SESSION['email'])) {
 								$_SESSION['email'] 		= $r_email;
 								$_SESSION['server_ip'] 		= $r_ip;
 
-								redirect("dashboard.php");
+								if($r_lvl == 1) {
+									redirect('dashboard.php');
+								} else if($r_lvl == 3) {
+									redirect('mentor.php');
+								}
 							} else {
 								trigger_error('Parola introdusă este invalidă!');
 							}
