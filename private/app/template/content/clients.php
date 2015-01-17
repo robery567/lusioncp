@@ -7,7 +7,7 @@
 				<div class="col-lg-8">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<i class="fa fa-user fa-fw"></i> Clienți (Credit : <?php echo reseller_credit($mysql['license_key']); ?>)
+							<i class="fa fa-user fa-fw"></i> Clienți (Credit: <?php echo reseller_credit($mysql['license_key']); ?>)
 							<div class="pull-right">
 								<div class="btn-group">
 									<button type="button"

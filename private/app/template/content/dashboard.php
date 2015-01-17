@@ -4,15 +4,15 @@
 				</div>
 			</div>
 			<div class="row">
-			<?php 
+			<?php
 			$action = isset($_GET['action']) ? sanitize($_GET['action']) : null;
 			if (!is_installed($_SESSION['username'], $db)) {
 				if ($action == "install") {
 					$remote->installInit();
-				} 
+				}
 			?>
 				<div class="alert alert-danger">
-					Serverul nu a fost inca instalat, va rugam sa o faceti apasand pe butonul alaturat.   
+					Serverul nu a fost inca instalat, va rugam sa o faceti apasand pe butonul alaturat.
 					<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
 						Instaleaza server
 					</button>
@@ -45,7 +45,7 @@
 						insert_log($_SESSION['user_id'], "Restart Server", $db);
 						echo '<meta http-equiv="refresh" content="0; url=dashboard.php">';
 					}
-				?> 
+				?>
 				<div class="col-lg-3 col-md-6">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
@@ -165,15 +165,15 @@
 											<td><?php if(!$offline) echo $remote->getKernel(); else echo 'Necunoscut'; ?></td>
 											<td><?php if (!$offline) echo $remote->uptime(); else echo '<font color="red">OFFLINE</font>'; ?></td>
 											<td><strong><font color="red"><?php if (!$offline) echo $remote->loadAvg(); else echo "0"; ?></font></strong></td>
-											 <td><strong><font color="orange"><?php if (!$offline) echo "58%"; else echo "0"; ?></font></strong></td>
+											<td><strong><font color="orange"><?php if (!$offline) echo "58%"; else echo "0"; ?></font></strong></td>
 											<td><font color="grey" size="2"><?php if (!$offline) echo $remote->ramMemory(); else echo "0"; ?></font></td>
 											<td><strong><font color="green"><?php if (!$offline) echo $remote->freeSpace(); else echo "0"; ?>/<?php if (!$offline) echo $remote->totalSpace(); else echo "0"; ?></font></strong></td>
-											 
+
 										</tr>
-										
-										 
+
+
 									</tbody>
-								
+
 								</table>
 							</div>
 							WARNING!&nbsp;&nbsp;<strong><font color="green">green</font></strong> - OK, &nbsp;&nbsp;<strong><font color="red">red</font></strong>  - critical, &nbsp;&nbsp;<strong><font color="orange">orange</font></strong> - attention!
@@ -181,12 +181,12 @@
 					</div>
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<i class="fa fa-clock-o fa-fw"></i> [SERVER DETAILS]
+							<i class="fa fa-clock-o fa-fw"></i> Acțiuni server
 						</div>
 						<div class="panel-body">
 							<div class="table-responsive">
-							 <button type="button" class="btn btn-success">Boot</button> 
-							 <?php 
+							 <button type="button" class="btn btn-success">Boot</button>
+							 <?php
 								if (!$offline) {
 									echo '<a href="dashboard.php?action=restart"> <button type="button" class="btn btn-danger">Restart</button> </a>';
 								} else if ($offline || $action == "restart") {
@@ -202,7 +202,7 @@
 				<div class="col-lg-4">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<i class="fa fa-bell fa-fw"></i> Norificări
+							<i class="fa fa-bell fa-fw"></i> Notificări
 						</div>
 						<div class="panel-body">
 							<div class="list-group">

@@ -13,9 +13,10 @@
 							<div class="row">
 								<div class="col-lg-12">
 									<?php
+										$user = isset($_GET['user']) ? sanitize($_GET['user']) : null;
 										if(isset($_POST['sure'])) {
 											$query = "
-												DELETE 
+												DELETE
 													FROM `lcpc_clients`
 												WHERE
 													`user_id` = '{$_SESSION['user_id']}'
@@ -32,7 +33,7 @@
 										<h3>ATENȚIE!</h3>
 										<p>
 											Ești sigur că dorești să ștergi acest client?<br>
-											Prin ștergerea unui client riști să pierzi banii oferiți de acesta și datele de pe acest server. 
+											Prin ștergerea unui client riști să pierzi banii oferiți de acesta și datele de pe acest server.
 											Ștergerea accesului la client este definitivă și se poate solda cu înjurături la adresa ta.
 										</p>
 										<p>
