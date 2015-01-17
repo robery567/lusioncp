@@ -26,21 +26,21 @@ try {
 			$db = new MySQLi($mysql['hostname'], $mysql['username'], $mysql['password'], $mysql['database']);
 
 			if ($db->connect_error) {
-				throw new Exception("PROBLEMA_CONEXIUNE");
+				throw new Exception('CONNECT_ERROR');
 			} else {
 				if($db->query("SELECT COUNT(DISTINCT `table_name`) FROM `information_schema`.`columns` WHERE `table_schema` = '{$mysql['database']}'")->num_rows == 0) {
-					throw new Exception("DATABASE_CORUPT");
+					throw new Exception('CORRUPT_DATABASE');
 				}
 			}
 		break;
 	}
 } catch (Exception $e) {
 	switch($e->getMessage()) {
-		case "PROBLEMA_CONEXIUNE":
+		case 'CONNECT_ERROR':
 			@header("Location: /offline.php");
 		break;
 
-		case "DATABASE_CORUPT":
+		case 'CORRUPT_DATABASE':
 			@header("Location: /offline.php");
 		break;
 
@@ -52,15 +52,15 @@ try {
 
 if(isset($_SESSION['email'])) {
 	$data = $db->query("
-		SELECT 
+		SELECT
 			user_id AS id,
-			server_ip AS ip, 
-			server_port AS port , 
-			server_username AS username, 
-			server_password AS password 
-		FROM 
-			lcpc_clients 
-		WHERE 
+			server_ip AS ip,
+			server_port AS port ,
+			server_username AS username,
+			server_password AS password
+		FROM
+			lcpc_clients
+		WHERE
 			email='{$_SESSION['email']}'
 	")->fetch_array(MYSQLI_ASSOC);
 
