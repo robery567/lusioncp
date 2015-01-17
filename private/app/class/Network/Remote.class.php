@@ -1,6 +1,6 @@
 <?php
 //namespace LusionCP\Network;
- 
+
 class Remote {
 
 	protected $_hostname;
@@ -35,7 +35,7 @@ class Remote {
 		return $this->ssh->exec('df -h / | grep "..G" | cut -c 14-22');
 	}
 
-	public function loadAvg() { 
+	public function loadAvg() {
 		return $this->ssh->exec("uptime | awk -F 'load averages:' '{ print $2 }'");
 	}
 
@@ -51,18 +51,22 @@ class Remote {
 	}
 
 	public function cpuUsage() {
-		
+    $cpus = $this->ssh->exec('sysctl hw.ncpu');
+    for($i = 1; $i <= $cpus; $i++) {
+      $cpu += $this->ssh->exec("sysctl dev.cpu.{$i}.cx_usage");
+    }
+    return $cpu / $cpus;
 	}
-	
-	public function installInit() { 
+
+	public function installInit() {
 		$this->ssh->setTimeout(1);
-		$this->ssh->exec("fetch 'http://{$_SERVER['HTTP_HOST']}/download/instalare' && sh instalare >> output.txt && rm instalare");
+		$this->ssh->exec("fetch 'http://{$_SERVER['HTTP_HOST']}/download/install' && sh install >> output.txt && rm install");
 	}
-	
+
 	public function sysRestart() {
-		$this->ssh->exec('shutdown -r now "Maintenance reboot by LusionCP."');
+		$this->ssh->exec('shutdown -r now "Maintenance reboot issued by LusionCP."');
 	}
-	
+
 	public function getKernel() {
 			return $this->ssh->exec('uname -s');
 	}
