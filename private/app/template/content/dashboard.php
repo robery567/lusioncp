@@ -161,14 +161,13 @@
 									<tbody>
 										<tr>
 											<td>1</td>
-											<td><strong><font color="green"><?php echo server_ip($_SESSION['username'], $DB); ?></font></strong></td>
+											<td><strong><font color="green"><?php echo server_ip($_SESSION['username']); ?></font></strong></td>
 											<td><?php if(!$offline) echo $remote->getKernel(); else echo 'Necunoscut'; ?></td>
 											<td><?php if (!$offline) echo $remote->uptime(); else echo '<font color="red">OFFLINE</font>'; ?></td>
-											<td><strong><font color="red"><?php if (!$offline) echo $remote->loadAvg(); else echo "0"; ?></font></strong></td>
-											<td><strong><font color="orange"><?php if (!$offline) echo $remote->cpuUsage(); else echo "0"; ?></font></strong></td>
-											<td><font color="grey" size="2"><?php if (!$offline) echo $remote->ramMemory(); else echo "0"; ?></font></td>
-											<td><strong><font color="green"><?php if (!$offline) echo $remote->freeSpace(); else echo "0"; ?>/<?php if (!$offline) echo $remote->totalSpace(); else echo "0"; ?></font></strong></td>
-
+											<td><strong><font color="red"><?php if (!$offline) echo $remote->loadAvg(); else echo 0; ?></font></strong></td>
+											<td><strong><font color="orange"><?php if (!$offline) echo $remote->cpuUsage(); else echo '0%'; ?></font></strong></td>
+											<td><font color="grey" size="2"><?php if (!$offline) echo $remote->ramMemory(); else echo '0'; ?></font></td>
+											<td><strong><font color="green"><?php if (!$offline) echo $remote->freeSpace(); else echo '0'; ?>/<?php if (!$offline) echo $remote->totalSpace(); else echo '0'; ?></font></strong></td>
 										</tr>
 
 
