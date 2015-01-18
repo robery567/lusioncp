@@ -17,11 +17,11 @@
 										if(isset($_POST['sure'])) {
 											$query = "
 												DELETE
-													FROM `lcpc_clients`
+													FROM lcpc_clients
 												WHERE
-													`user_id` = '{$_SESSION['user_id']}'
+													username = '{$user}'
 											";
-											$affect = $db->query($sql)->affected_rows;
+											$affect = $db->query($query)->affected_rows;
 											if($affect) {
 												success('Utilizatorul a fost șters cu succes!');
 											} else {
@@ -41,7 +41,7 @@
 										</p>
 									</div>
 									<form action="clients.php?action=delete&amp;user=<?= $user ?>" method="post">
-										<input type="submit"  class="btn btn-danger btn-lg" name="send" value="Da, vreau să-l șterg, suport consecințele!">
+										<input type="submit" class="btn btn-danger btn-lg" name="sure" value="Da">
 									</form>
 									</div>
 								</div>
