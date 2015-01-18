@@ -21,7 +21,6 @@
 												WHERE
 													`username` = '{$user}'
 											";
-<<<<<<< HEAD
 											$affect = $db->query($query)->affected_rows;
 											if($affect) {
 												insert_log($data['id'], 'Clientul ' . $user . ' a fost sters.');
@@ -29,14 +28,6 @@
 											} else {
 												trigger_error('A apărut o eroare în timpul ștergerii.');
 											}
-=======
-
-											$affect = $db->query($query);
-											$check = $db->query("SELECT COUNT(*) AS nr FROM lcpc_clients WHERE username = '{$user}'")->fetch_array(MYSQLI_ASSOC);
-											if (!$check['nr'])
-												success('Utilizatorul a fost șters cu succes!', 'clients.php', 2);
-										
->>>>>>> origin/master
 										}
 									?>
 									<div class="alert alert-danger">
