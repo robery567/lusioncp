@@ -17,12 +17,13 @@
 										if(isset($_POST['sure'])) {
 											$query = "
 												DELETE
-													FROM lcpc_clients
+													FROM `lcpc_clients`
 												WHERE
-													username = '{$user}'
+													`username` = '{$user}'
 											";
 											$affect = $db->query($query)->affected_rows;
 											if($affect) {
+												insert_log($_SESSION['user_id'], 'Clientul ' . $user . ' a fost sters.');
 												success('Utilizatorul a fost șters cu succes!');
 											} else {
 												trigger_error('A apărut o eroare în timpul ștergerii.');
