@@ -17,10 +17,11 @@
 										if(isset($_POST['sure'])) {
 											$query = "
 												DELETE
-													FROM lcpc_clients
+													FROM `lcpc_clients`
 												WHERE
-													username = '{$user}'
+													`username` = '{$user}'
 											";
+<<<<<<< HEAD
 											$affect = $db->query($query);
 											$check = $db->query("SELECT COUNT(*) AS nr FROM lcpc_clients WHERE username = '{$user}'")->fetch_array(MYSQLI_ASSOC);
 											if (!$check['nr'])
@@ -29,6 +30,12 @@
 											/*if(!$db->query("SELECT COUNT(*) FROM lcpc_clients WHERE username = '{$user}'")->num_rows) {
 												echo "<script>alert(1)</script>";
 												success('Utilizatorul a fost șters cu succes!', 'clients.add.php', 2);
+=======
+											$affect = $db->query($query)->affected_rows;
+											if($affect) {
+												insert_log($_SESSION['user_id'], 'Clientul ' . $user . ' a fost sters.');
+												success('Utilizatorul a fost șters cu succes!');
+>>>>>>> origin/master
 											} else {
 												trigger_error('A apărut o eroare în timpul ștergerii.');
 											}*/

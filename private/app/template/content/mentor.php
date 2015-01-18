@@ -12,7 +12,7 @@
                 <i class="fa fa-exchange fa-5x"></i>
               </div>
               <div class="col-xs-9 text-right">
-                <div class="huge">[buton 1]</div>
+                <div class="huge">C</div>
                 <div>[Meniu 1 ]</div>
               </div>
             </div>
@@ -57,14 +57,30 @@
                 <i class="fa fa-plus-circle fa-5x"></i>
               </div>
               <div class="col-xs-9 text-right">
-                <div class="huge">[ buton 3]</div>
-                <div>[meniu 3]</div>
+                <?php
+                $query = "
+                  SELECT
+                    `username`
+                  FROM
+                    `lcpc_clients`
+                  WHERE
+                    `is_installed` = 0
+                ";
+                $clients = [
+                  'uninstalled' => $db->query($query)->num_rows
+                ];
+                $cu_count = ($clients > 1) ? 'client' : 'clienți';
+                ?>
+                <div class="huge">Server neinstalat</div>
+                <div>Ai <?= $clients['uninstalled'] ?> <?= $cu_count ?> cu server neinstalat.</div>
               </div>
             </div>
           </div>
-          <a href="#">
+          <a href="clients.php?action=install">
             <div class="panel-footer">
-              <span class="pull-left">[detalii 3]</span>
+              <span class="pull-left">
+                Poți instala serverul clienților tăi de aici.
+              </span>
               <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
               <div class="clearfix"></div>
             </div>
