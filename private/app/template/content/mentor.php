@@ -69,7 +69,7 @@
                 $clients = [
                   'uninstalled' => $db->query($query)->num_rows
                 ];
-                $cu_count = ($clients > 1) ? 'clienți' : 'client';
+                $cu_count = ($clients > 1) ? 'client' : 'clienți';
                 ?>
                 <div class="huge">Server neinstalat</div>
                 <div>Ai <?= $clients['uninstalled'] ?> <?= $cu_count ?> cu server neinstalat.</div>
