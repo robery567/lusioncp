@@ -21,12 +21,17 @@
 												WHERE
 													username = '{$user}'
 											";
-											$affect = $db->query($query)->affected_rows;
-											if($affect) {
-												success('Utilizatorul a fost șters cu succes!');
+											$affect = $db->query($query);
+											$check = $db->query("SELECT COUNT(*) AS nr FROM lcpc_clients WHERE username = '{$user}'")->fetch_array(MYSQLI_ASSOC);
+											if (!$check['nr'])
+												success('Utilizatorul a fost șters cu succes!', 'clients.php', 2);
+											
+											/*if(!$db->query("SELECT COUNT(*) FROM lcpc_clients WHERE username = '{$user}'")->num_rows) {
+												echo "<script>alert(1)</script>";
+												success('Utilizatorul a fost șters cu succes!', 'clients.add.php', 2);
 											} else {
 												trigger_error('A apărut o eroare în timpul ștergerii.');
-											}
+											}*/
 										}
 									?>
 									<div class="alert alert-danger">
