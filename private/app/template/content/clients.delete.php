@@ -23,7 +23,7 @@
 											";
 											$affect = $db->query($query)->affected_rows;
 											if($affect) {
-												insert_log($_SESSION['user_id'], 'Clientul ' . $user . ' a fost sters.');
+												insert_log($data['id'], 'Clientul ' . $user . ' a fost sters.');
 												success('Utilizatorul a fost șters cu succes!');
 											} else {
 												trigger_error('A apărut o eroare în timpul ștergerii.');

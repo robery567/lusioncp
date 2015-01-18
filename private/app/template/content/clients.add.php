@@ -38,20 +38,20 @@
 											$check = $db->query($query)->num_rows;
 											if($check == 0) {
 												if($data['usermail']) {
-													$query = "INSERT INTO 
+													$query = "INSERT INTO
 																lcpc_clients (
-																	username, 
-																	email, 
-																	password, 
-																	clearance, 
-																	server_ip, 
-																	server_username, 
+																	username,
+																	email,
+																	password,
+																	clearance,
+																	server_ip,
+																	server_username,
 																	server_password
-																) 
+																)
 															VALUES (
-																'{$data['username']}', 
-																'{$data['usermail']}', 
-																'{$data['password']}', 
+																'{$data['username']}',
+																'{$data['usermail']}',
+																'{$data['password']}',
 																'{$data['userrank']}',
 																'{$data['hostname']}',
 																'{$data['hostuser']}',
@@ -59,7 +59,7 @@
 															)";
 													$register = $db->query($query);
 													if($register->affected_rows) {
-														insert_log($_SESSION['user_id'], 'Client nou adăugat cu succes');
+														insert_log($data['id'], 'Client nou adăugat cu succes');
 														success("Utilizatorul <strong>{$data['username']}</strong> a fost adăugat cu succes!");
 													} else {
 														trigger_error('Utilizatorul nu a putut fi înregistrat.');

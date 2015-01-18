@@ -18,15 +18,15 @@
 											SELECT
 												username AS useruser,
 												password AS userpass,
-												email AS usermail, 
-												server_ip AS hostname, 
-												server_username AS hostuser, 
-												server_password AS hostpass, 
+												email AS usermail,
+												server_ip AS hostname,
+												server_username AS hostuser,
+												server_password AS hostpass,
 												server_port AS hostport,
 												clearance AS user_level
-											FROM 
-												lcpc_clients 
-											WHERE 
+											FROM
+												lcpc_clients
+											WHERE
 												username = '{$user}'
 										";
 										$data = $db->query($query)->fetch_object();
@@ -43,16 +43,24 @@
 												'userrank' => isset($_POST['clearance']) ? sanitize($_POST['clearance']) : $data->user_level,
 											];
 
-											$check = $db->query("SELECT username FROM lcpc_clients WHERE username = '{$user}'")->num_rows;
+											$query = "
+												SELECT
+													`username`
+												FROM
+													`lcpc_clients`
+												WHERE
+													`username` = '{$user}'
+											";
+											$check = $db->query($query)->num_rows;
 											if($check == 1) {
 												$query = "
-													UPDATE 
-														lcpc_clients 
+													UPDATE
+														lcpc_clients
 													SET
 														username = '{$form['username']}',
-														password = '{$form['password']}', 
-														email = '{$form['usermail']}', 
-														server_ip = '{$form['hostname']}', 
+														password = '{$form['password']}',
+														email = '{$form['usermail']}',
+														server_ip = '{$form['hostname']}',
 														server_username = '{$form['hostuser']}',
 														server_password = '{$form['hostpass']}',
 														server_port = '{$form['hostport']}',
@@ -60,9 +68,9 @@
 													WHERE
 														username = '{$user}'
 												";
-												
+
 												if($db->query($query)) {
-													insert_log($_SESSION['user_id'], 'Clientul <strong>' . $user . '</strong> a fost modificat.');
+													insert_log($data['id'], 'Clientul <strong>' . $user . '</strong> a fost modificat.');
 													success("Utilizatorul <strong>{$user}</strong> a fost actualizat cu succes!!");
 												} else {
 													trigger_error('Actualizarea utilizatorului specificat a eșuat.');

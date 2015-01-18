@@ -133,7 +133,7 @@
           </div>
           <div class="panel-body">
             <div class="list-group">
-              <?= show_logs($_SESSION['user_id']); ?>
+              <?= show_logs($data['id']); ?>
             </div>
           </div>
         </div>

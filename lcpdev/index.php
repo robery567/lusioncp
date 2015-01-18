@@ -63,7 +63,6 @@ if(isset($_SESSION['email'])) {
 							if(password_verify($data['userpass'], $row['password'])) {
 								$query = "
 									SELECT
-										`user_id`,
 										`username`,
 										`email`,
 										`server_ip`,
@@ -77,10 +76,9 @@ if(isset($_SESSION['email'])) {
 								$statement = $db->prepare($query);
 								$statement->bind_param('s', $data['usermail']);
 								$statement->execute();
-								$statement->bind_result($r_id, $r_username, $r_email, $r_ip, $r_lvl);
+								$statement->bind_result($r_username, $r_email, $r_ip, $r_lvl);
 
 								$statement->fetch();
-								$_SESSION['user_id'] 		= $r_id;
 								$_SESSION['username'] 	= $r_username;
 								$_SESSION['email'] 		= $r_email;
 								$_SESSION['server_ip'] 		= $r_ip;

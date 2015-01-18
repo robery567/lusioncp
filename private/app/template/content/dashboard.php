@@ -41,8 +41,8 @@
 				</div>
 		<?php } else {
 					if ($action == "restart" && !$offline) {
-						$remote->cmdExec("shutdown -r now");
-						insert_log($_SESSION['user_id'], "Restart Server", $db);
+						$remote->cmdExec('shutdown -r now');
+						insert_log($data['id'], "Restart Server", $db);
 						echo '<meta http-equiv="refresh" content="0; url=dashboard.php">';
 					}
 				?>
@@ -205,7 +205,7 @@
 						</div>
 						<div class="panel-body">
 							<div class="list-group">
-								<?= show_logs($_SESSION['user_id']); ?>
+								<?= show_logs($data['id']); ?>
 							</div>
 						</div>
 					</div>
