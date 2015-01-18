@@ -66,10 +66,13 @@
                   WHERE
                     `is_installed` = 0
                 ";
-                $c_uninstalled = $db->query($query)->num_rows;
+                $clients = [
+                  'uninstalled' => $db->query($query)->num_rows
+                ];
+                $cu_count = ($clients > 1) ? 'clienți' : 'client';
                 ?>
-                <div class="huge">Clienți neinstalați</div>
-                <div>Ai <?= $c_uninstalled ?> cu server neinstalat.</div>
+                <div class="huge">Server neinstalat</div>
+                <div>Ai <?= $clients['uninstalled'] ?> <?= $cu_count ?> cu server neinstalat.</div>
               </div>
             </div>
           </div>
