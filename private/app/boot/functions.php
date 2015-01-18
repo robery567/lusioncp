@@ -109,14 +109,15 @@ function error_handler($errno, $errstr) {
 	return $string;
 }
 
-function success($message) {
+function success($message, $redirect = "dashboard.php", $time = 3) {
 	$string = '
 		<div class="alert alert-success">
 			<p>' . $message . '</p>
-		</div>
+		</div> 
+		<meta http-equiv="refresh" content="' . $time . '; url=' . $redirect . '" /> 
 	';
 
-	return $string;
+	echo $string;
 }
 
 function reseller_credit($license_key) {
