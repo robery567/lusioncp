@@ -68,6 +68,10 @@ class Remote {
 	}
 
 	public function getKernel() {
-			return $this->ssh->exec('uname -s');
+		return $this->ssh->exec('uname -s');
+	}
+	
+	public function getAccountsNumber() {
+		return $this->ssh->exec("mysql -u root -e 'SELECT COUNT(*) FROM account.account;'");
 	}
 }
