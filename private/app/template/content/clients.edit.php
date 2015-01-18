@@ -71,7 +71,7 @@
 
 												if($db->query($query)) {
 													insert_log($data['id'], 'Clientul <strong>' . $user . '</strong> a fost modificat.');
-													success("Utilizatorul <strong>{$user}</strong> a fost actualizat cu succes!!");
+													success("Utilizatorul <strong>{$user}</strong> a fost actualizat cu succes!", 'clients.php', 5);
 												} else {
 													trigger_error('Actualizarea utilizatorului specificat a eșuat.');
 												}

@@ -38,7 +38,8 @@
 											$check = $db->query($query)->num_rows;
 											if($check == 0) {
 												if($data['usermail']) {
-													$query = "INSERT INTO
+													$query = "
+															INSERT INTO
 																lcpc_clients (
 																	username,
 																	email,
