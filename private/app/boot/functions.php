@@ -58,7 +58,22 @@ function ping($host, $port = 22, $timeout = 6) {
 function insert_log($user_id, $action) {
 	global $db;
 	$date = date("m.d.y H:i:s");
-	return $db->query("INSERT INTO lcpc_logs (user_id, action, date) VALUES ('{$user_id}', '{$action}', '{$date}')");
+	$query = "
+	  INSERT INTO
+	    `lcpc_logs`
+	    (
+	    	`user_id`,
+	    	`action`,
+	    	`date`
+	    )
+	  VALUES
+	  (
+	    '{$user_id}',
+	    '{$action}',
+	    NOW()
+	  )
+	";
+	return $db->query($query);
 }
 
 function show_logs($user_id) {
@@ -73,15 +88,15 @@ function show_logs($user_id) {
 }
 
 function get_ip() {
-	if(function_exists( 'apache_request_headers')) {
+	if(function_exists('apache_request_headers')) {
 		$headers = apache_request_headers();
 	} else {
 		$headers = $_SERVER;
 	}
 
-	if(array_key_exists( 'X-Forwarded-For', $headers) && filter_var($headers['X-Forwarded-For'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+	if(array_key_exists('X-Forwarded-For', $headers) && filter_var($headers['X-Forwarded-For'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
 		$the_ip = $headers['X-Forwarded-For'];
-	} else if(array_key_exists( 'HTTP_X_FORWARDED_FOR', $headers) && filter_var($headers['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+	} else if(array_key_exists('HTTP_X_FORWARDED_FOR', $headers) && filter_var($headers['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
 		$the_ip = $headers['HTTP_X_FORWARDED_FOR'];
 	} else {
 		$the_ip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
