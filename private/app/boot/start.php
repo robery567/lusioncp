@@ -1,13 +1,15 @@
 <?php
 
-//use LusionCP\Network\Remote;
+require __DIR__ . '/../config/variables.php';
 
-session_save_path(__DIR__ . '/../safelocker/sessions/');
+session_save_path($config['session_savepath']);
 session_name('lcpgame');
 session_start();
 
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
+
+date_default_timezone_set($config['default_timezone']);
 
 define('__LCP_APP__', __DIR__ . '/../..');
 
