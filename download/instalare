@@ -4,6 +4,10 @@
 #	LusionCP Install Script
 #	V1.5 B1
 #
+
+# Download link variable
+DOWNLOAD = "https://www.lusioncp.me/lcpdev/client_install.php"
+
 echo 'export BATCH=yes' >> ~/.bash_profile #1%
 fetch --no-verify-peer -o - 'https://www.lusioncp.me/lcpdev/client_install.php?action=install_procent&procent=1'
 
