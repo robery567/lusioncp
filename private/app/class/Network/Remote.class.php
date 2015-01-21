@@ -1,5 +1,4 @@
 <?php
-//namespace LusionCP\Network;
 
 class Remote {
 
@@ -51,11 +50,11 @@ class Remote {
 	}
 
 	public function cpuUsage() {
-    (int) $cpuCount = $this->ssh->exec('sysctl hw.ncpu | cut -c 10-11');
-    for($i = 0; $i <= $cpuCount; $i++) {
-      $cpuUsage += $this->ssh->exec("sysctl dev.cpu.{$i}.cx_usage | cut -c 21-26");
-    }
-    return $cpuUsage / $cpuCount . '%';
+    	(int) $cpuCount = $this->ssh->exec('sysctl hw.ncpu | cut -c 10-11');
+    	for($i = 0; $i <= $cpuCount; $i++) {
+      		$cpuUsage += $this->ssh->exec("sysctl dev.cpu.{$i}.cx_usage | cut -c 21-26");
+    	}
+    	return $cpuUsage / $cpuCount . '%';
 	}
 
 	public function installInit() {
@@ -69,9 +68,5 @@ class Remote {
 
 	public function getKernel() {
 		return $this->ssh->exec('uname -s');
-	}
-	
-	public function getAccountsNumber() {
-		return $this->ssh->exec("mysql -u root -e 'SELECT COUNT(*) FROM account.account;'");
 	}
 }

@@ -22,6 +22,7 @@ require __DIR__ . '/functions.php';
 require_once __DIR__ . '/../config/database.php';
 
 require __DIR__ . '/../class/Network/Remote.class.php';
+require __DIR__ . '/../class/Network/RemoteDatabase.class.php';
 
 set_error_handler('error_handler');
 
@@ -72,6 +73,7 @@ if(isset($_SESSION['email'])) {
 
 	if (ping($data['ip'])) {
 		$remote = @new Remote($data['ip'], $data['username'], $data['password']);
+		$remotedb = @new RemoteDatabase('account');
 		$offline=0;
 	} else {
 		$offline=1;

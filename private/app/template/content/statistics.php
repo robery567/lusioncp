@@ -41,8 +41,8 @@
 								<table class="table table-striped table-bordered table-hover">
 									<tbody>
 										<tr>
-											<td>{nume}:</td>
-											<td>{valoare}</td>
+											<td>Conturi existente:</td>
+											<td><?= $remotedb->getTotalAccounts() ?></td>
 										</tr>
 										<tr>
 											<td>{nume}:</td>
