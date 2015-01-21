@@ -6,15 +6,15 @@
 		redirect('index.php');
 	}
 
-	$action  = isset($_GET['action'])  ? $_GET['action']  : NULL;
-	$procent = isset($_GET['procent']) ? $_GET['procent'] : NULL;
+	$action  = isset($_GET['action'])  ? $_GET['action']  : null;
+	$procent = isset($_GET['percent']) ? $_GET['percent'] : null;
 
 	if (is_null($action)) {
 		redirect('index.php');
 	}
 
 	switch ($action) {
-		case 'install_procent':
+		case 'install_percent':
 			if (is_null($procent)) {
 				redirect('index.php');
 			} else {
