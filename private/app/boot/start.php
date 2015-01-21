@@ -9,9 +9,8 @@ session_start();
 if($config['debug']) {
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'On');
-} else {
-	error_reporting(0);
 }
+error_reporting(0);
 
 date_default_timezone_set($config['default_timezone']);
 
