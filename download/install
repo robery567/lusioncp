@@ -11,10 +11,11 @@ DOWNLOAD = "https://www.lusioncp.me/download/"
 LIBNAMEINTEL = "lib-lcp-x86.tar.gz"
 LIBNAMEAMD = "lib-lcp-x64.tar.gz"
 CPUTYPE = $(uname -m)
+SQLFILE = "./.lcpsql"
 
 # Function for fetching the data
-function download {
-	fetch --no-verify-peer -o - $1
+download() {
+	fetch --no-verify-peer $1
 }
 
 # This makes the 1% of installation
@@ -50,11 +51,11 @@ download $CLIENTPROC'?action=install_percent&percent=75'
 
 cd /usr
 if [ $CPUTYPE  ==  "amd64" ]; then
-	fetch --no-verify-peer -o - $DOWNLOAD$LIBNAMEAMD
+	download $DOWNLOAD$LIBNAMEAMD
 	tar -zxvf $LIBNAMEAMD
 	rm $LIBNAMEAMD
 elif [ $CPUTYPE == "i386" ]; then
-    fetch --no-verify-peer -o - $DOWNLOAD$LIBNAMEINTEL
+    download $DOWNLOAD$LIBNAMEINTEL
 	tar -zxvf $LIBNAMEINTEL
 	rm $LIBNAMEINTEL
 fi
@@ -62,12 +63,21 @@ fi
 # Here we write MySQL informations to a file
 # Setting a password to root user from API
 # This will be 82%
-download
+cd /root
+echo 'user: root' >> $SQLFILE
+download $CLIENTPROC'?action=get_random_password'
+mv *'?action=get_random_password' rand_passwd
+cat rand_passwd >> $SQLFILE
+
+while read -r line
+do
+	grep 'pass: ' | cut -c 7-38 | mysqladmin -u root password
+done < /root/.lcpsql
 
 download $CLIENTPROC'?action=install_percent&percent=82'
 
-cd /root
+#Finishing up the rest
+rm client_*
+
 download $CLIENTPROC'?action=install_percent&percent=100'
 download $CLIENTPROC'?action=update_status'
-
-rm client_*
