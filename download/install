@@ -1,53 +1,59 @@
 #!/bin/bash
 
-#	 
+#
 #	LusionCP Install Script
-#	V1.5 B1
+#	V1.6 A1
 #
 
-# Download link variable
-DOWNLOAD = "https://www.lusioncp.me/lcpdev/client_install.php"
+# Variables
+CLIENTPROC = "https://www.lusioncp.me/lcpdev/client_install.php"
+DOWNLOAD = "https://www.lusioncp.me/download/"
+LIBNAMEINTEL = "lib-lcp-x86.tar.gz"
+LIBNAMEAMD = "lib-lcp-x64.tar.gz"
+CPUTYPE = $(uname -m)
 
-echo 'export BATCH=yes' >> ~/.bash_profile #1%
-fetch --no-verify-peer -o - 'https://www.lusioncp.me/lcpdev/client_install.php?action=install_procent&procent=1'
+# This makes the 1% of installation
+# (originally for testing the API)
+echo 'export BATCH=yes' >> ~/.bash_profile
+fetch --no-verify-peer -o - $CLIENTPROC'?action=install_percent&percent=1'
 
-# getting the 'free' command written in perl
+# This makes 15% of installation
+# Getting the 'free' command written in perl
 fetch http://www.cyberciti.biz/files/scripts/freebsd-memory.pl.txt
-mv freebsd-memory.pl.txt /usr/local/bin/free #15%
+mv freebsd-memory.pl.txt /usr/local/bin/free
 chmod +x /usr/local/bin/free
-fetch --no-verify-peer -o - 'https://www.lusioncp.me/lcpdev/client_install.php?action=install_procent&procent=15'
+fetch --no-verify-peer -o - $CLIENTPROC'?action=install_percent&percent=15'
 
-portsnap --interactive fetch extract # 50% 
+# Ports management rounds up to 50% of installation process
+portsnap --interactive fetch extract
 portsnap --interactive fetch update
 pkg update
 pkg upgrade -y
 
-fetch --no-verify-peer -o - 'https://www.lusioncp.me/lcpdev/client_install.php?action=install_procent&procent=50'
+fetch --no-verify-peer -o - $CLIENTPROC'?action=install_percent&percent=50'
 
-#Dezinstalare OpenSSL (Inutil !?)
+# MariaDB requests make config if SSL installed
+# So we remove it
 cd /usr/ports/security/openssl && make deinstall
 
-#cd /usr/ports/databases/mysql55-server  && make install WITH_XCHARSET=all clean # 75%  OLD ? 
-# MariaDB 5.5
-# cd /usr/ports/databases/mariadb55-server/ && make install clean  ( INSTALARE DIN PORTURI INEFICIENTA )
-# Installing using pkg install (SUCCESS !)
+# We install MariaDB Server
+# A replacement for MySQL (which requires make config !!!)
 pkg install -y databases/mariadb55-server
 echo 'mysql_enable="YES"' >> /etc/rc.conf
 
-fetch --no-verify-peer -o - 'https://www.lusioncp.me/lcpdev/client_install.php?action=install_procent&procent=75'
+fetch --no-verify-peer -o - $CLIENTPROC'?action=install_percent&percent=75'
 
 cd /usr
-if [ `uname -m`  ==  "amd64" ]; then
-	fetch --no-verify-peer -o - 'https://www.lusioncp.me/download/lib-gamecpx64.tar.gz'
-	tar -zxvf lib-gamecpx64.tar.gz
-	rm lib-gamecpx64.tar.gz	
-elif [ `uname -m` == "i386" ]; then
-        fetch --no-verify-peer -o - 'https://www.lusioncp.me/download/lib-gamecpx86.tar.gz'
-	tar -zxvf lib-gamecpx86.tar.gz
-	rm lib-gamecpx86.tar.gz
+if [ $CPUTYPE  ==  "amd64" ]; then
+	fetch --no-verify-peer -o - $DOWNLOAD$LIBNAMEAMD
+	tar -zxvf $LIBNAMEAMD
+	rm $LIBNAMEAMD
+elif [ $CPUTYPE == "i386" ]; then
+    fetch --no-verify-peer -o - $DOWNLOAD$LIBNAMEINTEL
+	tar -zxvf $LIBNAMEINTEL
+	rm $LIBNAMEINTEL
 fi
-fetch --no-verify-peer -o - 'https://www.lusioncp.me/lcpdev/client_install.php?action=install_procent&procent=100'
-fetch --no-verify-peer -o - 'https://www.lusioncp.me/lcpdev/client_install.php?action=update_status'
+fetch --no-verify-peer -o - $CLIENTPROC'?action=install_percent&percent=100'
+fetch --no-verify-peer -o - $CLIENTPROC'?action=update_status'
 
 rm client_*
-
