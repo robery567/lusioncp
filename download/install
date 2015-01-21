@@ -12,17 +12,22 @@ LIBNAMEINTEL = "lib-lcp-x86.tar.gz"
 LIBNAMEAMD = "lib-lcp-x64.tar.gz"
 CPUTYPE = $(uname -m)
 
+# Function for fetching the data
+function download {
+	fetch --no-verify-peer -o - $1
+}
+
 # This makes the 1% of installation
 # (originally for testing the API)
 echo 'export BATCH=yes' >> ~/.bash_profile
-fetch --no-verify-peer -o - $CLIENTPROC'?action=install_percent&percent=1'
+download $CLIENTPROC'?action=install_percent&percent=1'
 
 # This makes 15% of installation
 # Getting the 'free' command written in perl
-fetch http://www.cyberciti.biz/files/scripts/freebsd-memory.pl.txt
+download http://www.cyberciti.biz/files/scripts/freebsd-memory.pl.txt
 mv freebsd-memory.pl.txt /usr/local/bin/free
 chmod +x /usr/local/bin/free
-fetch --no-verify-peer -o - $CLIENTPROC'?action=install_percent&percent=15'
+download $CLIENTPROC'?action=install_percent&percent=15'
 
 # Ports management rounds up to 50% of installation process
 portsnap --interactive fetch extract
@@ -30,7 +35,7 @@ portsnap --interactive fetch update
 pkg update
 pkg upgrade -y
 
-fetch --no-verify-peer -o - $CLIENTPROC'?action=install_percent&percent=50'
+download $CLIENTPROC'?action=install_percent&percent=50'
 
 # MariaDB requests make config if SSL installed
 # So we remove it
@@ -41,7 +46,7 @@ cd /usr/ports/security/openssl && make deinstall
 pkg install -y databases/mariadb55-server
 echo 'mysql_enable="YES"' >> /etc/rc.conf
 
-fetch --no-verify-peer -o - $CLIENTPROC'?action=install_percent&percent=75'
+download $CLIENTPROC'?action=install_percent&percent=75'
 
 cd /usr
 if [ $CPUTYPE  ==  "amd64" ]; then
@@ -53,7 +58,16 @@ elif [ $CPUTYPE == "i386" ]; then
 	tar -zxvf $LIBNAMEINTEL
 	rm $LIBNAMEINTEL
 fi
-fetch --no-verify-peer -o - $CLIENTPROC'?action=install_percent&percent=100'
-fetch --no-verify-peer -o - $CLIENTPROC'?action=update_status'
+
+# Here we write MySQL informations to a file
+# Setting a password to root user from API
+# This will be 82%
+download
+
+download $CLIENTPROC'?action=install_percent&percent=82'
+
+cd /root
+download $CLIENTPROC'?action=install_percent&percent=100'
+download $CLIENTPROC'?action=update_status'
 
 rm client_*
