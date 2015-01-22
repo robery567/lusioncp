@@ -50,10 +50,10 @@
 														trigger_error('Serverfile-ul nu a putut înregistrat.');
 													}
 											}
-										} 
+										}
 									?>
 									<div class="table-responsive">
-										<form action="add_serverfile.php" method="post">
+										<form action="serverfiles.php?action=add" method="post">
 										<table class="table table-bordered table-hover table-striped">
 											<tbody>
 												<tr>
