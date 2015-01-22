@@ -11,7 +11,7 @@ DOWNLOAD = "https://www.lusioncp.me/download/"
 LIBNAMEINTEL = "lib-lcp-x86.tar.gz"
 LIBNAMEAMD = "lib-lcp-x64.tar.gz"
 CPUTYPE = $(uname -m)
-SQLFILE = "./.lcpsql"
+SQLFILE = "/root/lcp/.lcpsql"
 
 # Function for fetching the data
 download() {
@@ -21,6 +21,7 @@ download() {
 # This makes the 1% of installation
 # (originally for testing the API)
 echo 'export BATCH=yes' >> ~/.bash_profile
+mkdir /root/lcp
 download $CLIENTPROC'?action=install_percent&percent=1'
 
 # This makes 15% of installation
@@ -76,6 +77,7 @@ download $CLIENTPROC'?action=install_percent&percent=82'
 
 #Finishing up the rest
 rm client_*
+mkdir /root/lcp/backup
 
 download $CLIENTPROC'?action=install_percent&percent=100'
 download $CLIENTPROC'?action=update_status'
