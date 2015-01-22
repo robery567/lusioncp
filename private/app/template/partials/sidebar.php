@@ -44,7 +44,7 @@
 									<a href="clients.php">Vezi clienți</a>
 								</li>
 								<li>
-									<a href="#">Adaugă serverfiles</a>
+									<a href="add_serverfile.php">Adaugă serverfiles</a>
 								</li>
 								<li>
 									<a href="#">Vezi log-uri</a>
