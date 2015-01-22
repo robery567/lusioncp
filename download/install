@@ -2,7 +2,7 @@
 
 #
 #	LusionCP Install Script
-#	V1.6 A1
+#	V1.6 A4
 #
 
 # Variables
@@ -69,10 +69,8 @@ download $CLIENTPROC'?action=get_random_password'
 mv *'?action=get_random_password' rand_passwd
 cat rand_passwd >> $SQLFILE
 
-while read -r line
-do
-	grep 'pass: ' | cut -c 7-38 | mysqladmin -u root password
-done < /root/.lcpsql
+# Here we setup the root password get from local .lcpsql file
+download $CLIENTPROC'?action=send_secure_mysql'
 
 download $CLIENTPROC'?action=install_percent&percent=82'
 
