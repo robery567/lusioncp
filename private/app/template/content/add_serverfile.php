@@ -1,13 +1,13 @@
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Clienti</h1>
+					<h1 class="page-header">ClienÈ›i</h1>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<i class="fa fa-user fa-fw"></i> Adaugare serverfile
+							<i class="fa fa-user fa-fw"></i> AdÄƒugare serverfile
 						</div>
 						<div class="panel-body">
 							<div class="row">
@@ -26,15 +26,15 @@
 												FROM
 													lcpc_files
 												WHERE
-													file_name = '{$data['username']}'
+													file_name = '{$data['file_name']}'
 											";
 											$check = $db->query($query)->num_rows;
 											if($check == 0) {
 													$query = "INSERT INTO
-																lcpc_clients (
+																lcpc_files (
 																	file_name,
 																	file_url,
-																	db_url,
+																	db_url
 																)
 															VALUES (
 																'{$data['file_name']}',
@@ -44,16 +44,16 @@
 													$register = $db->query($query);
 													$check = $db->query("SELECT COUNT(*) AS nr FROM lcpc_files WHERE file_name = '{$data['file_name']}'")->fetch_array(MYSQLI_ASSOC);
 													if ($check['nr']) {
-														insert_log($data['id'], 'Serverfile nou adãugat cu succes');
-														success("Serverfile-ul <strong>{$data['file_name']}</strong> a fost adãugat cu succes!", 'clients.php', 5);
+														insert_log($data['id'], 'Serverfile nou adÄƒugat cu succes');
+														success("Serverfile-ul <strong>{$data['file_name']}</strong> a fost adÄƒugat cu succes!", 'add_serverfile.php', 5);
 													} else {
-														trigger_error('Serverfile-ul nu a putut fi înregistrat.');
+														trigger_error('Serverfile-ul nu a putut Ã®nregistrat.');
 													}
 											}
 										} 
 									?>
 									<div class="table-responsive">
-										<form action="clients.php?action=add" method="post">
+										<form action="add_serverfile.php" method="post">
 										<table class="table table-bordered table-hover table-striped">
 											<tbody>
 												<tr>
