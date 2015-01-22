@@ -1,5 +1,4 @@
 <?php
-
 require __DIR__ . '/../../private/app/boot/start.php';
 if (!isset($_SESSION['email']) && empty($_SESSION['email'])) {
 	redirect('index.php');
