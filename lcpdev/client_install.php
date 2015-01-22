@@ -28,9 +28,33 @@
 			echo $hash;
 		break;
 
+		case 'send_secure_mysql':
+			$user = $remote->cmdExec('grep "user: " | cut -c 7-38');
+			$pass = $remote->cmdExec('grep "pass: " | cut -c 7-38');
+			$user = preg_replace('/[^a-zA-Z]+/', '', $user);
+			$host = $_SERVER['REMOTE_ADDR'];
+
+			$tempcon = @new MySQLi($host, $user, $pass, 'mysql');
+			$query = "
+				UPDATE
+					user
+				SET
+					Password = PASSWORD('{$pass}')
+				WHERE
+					User = '{$user}'
+			";
+			$tempcon->query($query);
+			$tempcon->close();
+
+			unset($tempcon);
+			unset($user);
+			unset($pass);
+			unset($host);
+			break;
+
 		case 'update_status':
 			update_status($_SERVER['REMOTE_ADDR'], 1);
-		break;
+			break;
 
 	}
 ?>
