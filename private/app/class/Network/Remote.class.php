@@ -19,6 +19,7 @@ class Remote {
 			 $this->ssh->login($this->_username, $this->_password);
 		}
 		unset($this->_password);
+		unset($password);
 	}
 
 	public function cmdExec($cmd) {
