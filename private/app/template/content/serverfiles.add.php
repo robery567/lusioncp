@@ -29,7 +29,11 @@
 													file_name = '{$data['file_name']}'
 											";
 											$check = $db->query($query)->num_rows;
-											if($check == 0) {
+											if($check == 0 &&
+													strlen($data['file_name']) &&
+													strlen($datap['file_url']) &&
+													strlen($data['db_url'])
+												) {
 													$query = "INSERT INTO
 																lcpc_files (
 																	file_name,
@@ -45,7 +49,7 @@
 													$check = $db->query("SELECT COUNT(*) AS nr FROM lcpc_files WHERE file_name = '{$data['file_name']}'")->fetch_array(MYSQLI_ASSOC);
 													if ($check['nr']) {
 														insert_log($data['id'], 'Serverfile nou adăugat cu succes');
-														success("Serverfile-ul <strong>{$data['file_name']}</strong> a fost adăugat cu succes!", 'add_serverfile.php', 5);
+														success("Serverfile-ul " . strcmp($data['file_name'], "") .  " <strong>{$data['file_name']}</strong> a fost adăugat cu succes!", 'serverfiles.php', 5);
 													} else {
 														trigger_error('Serverfile-ul nu a putut înregistrat.');
 													}
@@ -62,7 +66,7 @@
 												</tr>
 												<tr>
 													<td>URL SERVERFILE:</td>
-													<td><input type="text"" name="file_url"></td>
+													<td><input type="text" name="file_url"></td>
 												</tr>
 												<tr>
 													<td>DB URL (.tar.gz,.tar format):</td>
