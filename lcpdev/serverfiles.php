@@ -23,6 +23,7 @@ if (!isset($_SESSION['email']) && empty($_SESSION['email'])) {
 			<?php
 				$action = isset($_GET['action']) ? sanitize($_GET['action']) : null;
 				switch($action):
+					
 					case 'add':
 						require __LCP_APP__ . '/app/template/content/serverfiles.add.php';
 						break;
@@ -37,7 +38,7 @@ if (!isset($_SESSION['email']) && empty($_SESSION['email'])) {
 
 					default:
 						require __LCP_APP__ . '/app/template/content/serverfiles.php';
-				
+
 				endswitch;
 			?>
 		</div>
