@@ -124,12 +124,22 @@ function error_handler($errno, $errstr) {
 	return $string;
 }
 
+function warning($message) {
+	$string = '
+		<div class="alert alert-warning">
+			<p>' . $message . '</p>
+		</div>
+	';
+
+	echo $string;
+}
+
 function success($message, $redirect = "dashboard.php", $time = 3) {
 	$string = '
 		<div class="alert alert-success">
 			<p>' . $message . '</p>
-		</div> 
-		<meta http-equiv="refresh" content="' . $time . '; url=' . $redirect . '" /> 
+		</div>
+		<meta http-equiv="refresh" content="' . $time . '; url=' . $redirect . '" />
 	';
 
 	echo $string;
