@@ -86,5 +86,8 @@ class Remote {
 		foreach($cmd as $type => $command) {
 			$this->ssh->exec($command);
 		}
+
+		$this->ssh->exec('service mysql-server start');
+		$this->ssh->exec('./usr/home/metin2/start.sh');
 	}
 }
