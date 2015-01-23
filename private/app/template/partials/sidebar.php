@@ -29,9 +29,10 @@
 								<li>
 									<a href="console.php">Consolă SSH</a>
 								</li>
-								<li>
+								<!-- TBD
+									<li>
 									<a href="#">Vezi log-uri</a>
-								</li>
+								</li> -->
 							</ul>
 						</li>
 						<?php
