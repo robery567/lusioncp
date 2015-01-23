@@ -25,6 +25,8 @@
                             warning("Comanda a fost trimisa. Va rugam asteptati...");
                             $date = date("dmY_his");
 
+                            $remote->cmdExec('./usr/home/metin2/stop.sh');
+                            $remote->cmdExec('./usr/home/metin2/clear.sh');
                             $remote->cmdExec('service mysql-server stop');
 
                             $clean_cmd = [
@@ -61,22 +63,40 @@
                             }
 
                             $remote->cmdExec('cd /root/lcp && rm -rf temp');
+                            $remote->cmdExec('echo "'.$getsf->file_name.'" > /root/lcp/lastsf');
+
                             $remote->cmdExec('service mysql-server start');
+                            $remote->cmdExec('./usr/home/metin2/start.sh');
                         } else {
                             trigger_error('<strong>ATENȚIE!</strong> Instalarea poate dura pana la 10 minute. Aveti rabdare!');
                         }
                         ?>
                         <div class="table-responsive">
-                            <form action="install_server.php" method="post">
+                            <?php
+                            $cached_filename = $remote->cmdExec('cat /root/lcp/lastsf');
+                            $query = "
+                                SELECT
+                                    *
+                                FROM
+                                    lcpc_files
+                                WHERE
+                                    file_name = '{$cached_filename}'
+                            ";
+                            $special = $db->query($query)->fetch_obj();
+
+                            ?>
+                            <form action="serverfiles.php?action=install" method="post">
                                 <table class="table table-bordered table-hover table-striped">
                                     <tbody>
                                         <tr>
                                             <td>Alege server files:</td>
                                             <td>
                                                 <select name="serverfiles" class="btn btn-default btn-xs dropdown-toggle">
-                                                    <option value="0" disabled>---</option>
+                                                    <option value="0" disabled>Ultimul serverfiles instalat:</option>
+                                                    <option value="<?= $special->file_id ?>" selected><?= $special->file_name ?></option>
+                                                    <option value="0" disabled>Alege alt serverfiles de pe listă:</option>
                                                     <?php while($sf = $getsf->fetch_obj): ?>
-                                                    <option value="<?= $sf->file_id ?>"><?= $sf->file_name ?></option>
+                                                    <option value="<?= $sf->file_id ?>"<?php if($sf->file_id == $special->file_id) ?> disabled<?php endif ?>><?= $sf->file_name ?></option>
                                                     <?php endwhile; ?>
                                                 </select>
                                             </td>
