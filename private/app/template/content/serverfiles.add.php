@@ -31,7 +31,7 @@
 											$check = $db->query($query)->num_rows;
 											if($check == 0 &&
 													strlen($data['file_name']) &&
-													strlen($datap['file_url']) &&
+													strlen($data['file_url']) &&
 													strlen($data['db_url'])
 												) {
 													$query = "INSERT INTO
