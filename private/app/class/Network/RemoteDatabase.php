@@ -1,6 +1,6 @@
 <?php
 
-class RemoteQuery extends Remote {
+class RemoteDatabase extends Remote {
 
     protected $_sql_data;
     protected $_sql_xcmd;
