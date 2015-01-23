@@ -13,7 +13,7 @@
         <div class="row">
           <div class="col-lg-12">
             <?php
-            $file_name = isset($_GET['user']) ? sanitize($_GET['user']) : null;
+            $file_name = isset($_GET['file_name']) ? sanitize($_GET['file_name']) : null;
             if(isset($_POST['sure'])) {
               $query = "
               DELETE
