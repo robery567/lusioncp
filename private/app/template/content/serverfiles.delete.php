@@ -36,7 +36,7 @@
                 Ești sigur că dorești să ștergi acest serverfile?<br>
               </p>
             </div>
-            <form action="serverfiles.php?action=delete&amp;file_name=<?= $user ?>" method="post">
+            <form action="serverfiles.php?action=delete&amp;file_name=<?= $file_name ?>" method="post">
               <input type="submit" class="btn btn-danger btn-lg" name="sure" value="Da">
             </form>
           </div>

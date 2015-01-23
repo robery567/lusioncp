@@ -49,7 +49,7 @@
 													$check = $db->query("SELECT COUNT(*) AS nr FROM lcpc_files WHERE file_name = '{$data['file_name']}'")->fetch_array(MYSQLI_ASSOC);
 													if ($check['nr']) {
 														insert_log($data['id'], 'Serverfile nou adăugat cu succes');
-														success("Serverfile-ul " . strcmp($data['file_name'], "") .  " <strong>{$data['file_name']}</strong> a fost adăugat cu succes!", 'serverfiles.php', 5);
+														success("Serverfile-ul <strong>{$data['file_name']}</strong> a fost adăugat cu succes!", 'serverfiles.php', 5);
 													} else {
 														trigger_error('Serverfile-ul nu a putut înregistrat.');
 													}
