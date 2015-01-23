@@ -24,13 +24,13 @@
             WHERE
             file_name = '{$file_name}'
             ";
-            $data = $db->query($query)->fetch_object();
+            $data2 = $db->query($query)->fetch_object();
 
             if(isset($_POST['update'])) {
               $form = [
-                'file_name' => isset($_POST['file_name'])  ? sanitize($_POST['file_name'])  : $data->file_name,
-                'file_url'  => isset($_POST['file_url'])   ? sanitize($_POST['file_url'])   : $data->file_url,
-                'db_url'    => isset($_POST['db_url'])     ? sanitize($_POST['db_url'])     : $data->db_url,
+                'file_name' => isset($_POST['file_name'])  ? sanitize($_POST['file_name'])  : $data2->file_name,
+                'file_url'  => isset($_POST['file_url'])   ? sanitize($_POST['file_url'])   : $data2->file_url,
+                'db_url'    => isset($_POST['db_url'])     ? sanitize($_POST['db_url'])     : $data2->db_url,
               ];
 
               $query = "
@@ -49,13 +49,13 @@
                 SET
                 file_name = '{$form['file_name']}',
                 file_url = '{$form['file_url']}',
-                db_url = '{$form['db_url']}',
+                db_url = '{$form['db_url']}'
                 WHERE
                 file_name = '{$file_name}'
                 ";
 
-
-                if($db->query($query)) {
+                $db->query($query);
+                if($db->affected_rows) {
                   insert_log($data['id'], 'Serverfile-ul <strong>' . $file_name . '</strong> a fost modificat.');
                   success("Serverfile-ul <strong>{$file_name}</strong> a fost actualizat cu succes!", 'serverfiles.php', 5);
                 } else {
@@ -76,11 +76,11 @@
                     </tr>
                     <tr>
                       <td> URL Serverfile:</td>
-                      <td><input type="text" name="file_url" value="<?= $data->file_url ?>"></td>
+                      <td><input type="text" name="file_url" value="<?= $data2->file_url ?>"></td>
                     </tr>
                     <tr>
                       <td>URL DB:</td>
-                      <td><input type="text" name="db_url" value="<?= $data->db_url ?>"></td>
+                      <td><input type="text" name="db_url" value="<?= $data2->db_url ?>"></td>
                     </tr>
                     <tr>
                       <td>&nbsp;</td>
