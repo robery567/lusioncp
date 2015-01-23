@@ -70,4 +70,21 @@ class Remote {
 	public function getKernel() {
 		return $this->ssh->exec('uname -s');
 	}
+
+	public function doBackup() {
+		$serverfiles = $this->ssh->exec('cat /root/lcp/lastsf');
+		$date = date('dmYHis');
+
+		$this->ssh->exec('./usr/home/metin2/stop.sh');
+		$this->ssh->exec('service mysql-server stop');
+
+		$cmd = [
+			'files' => 'cd /usr/home && tar -czf metin2 backup_game_'.$date.'.tgz && mv backup_game_*.tgz /root/lcp/backup',
+			'datab' => 'cd /var/db && tar -czf mysql backup_db_'.$date.'.tgz && mv backup_db_*.tgz /root/lcp/backup'
+		];
+
+		foreach($cmd as $type => $command) {
+			$this->ssh->exec($command);
+		}
+	}
 }
