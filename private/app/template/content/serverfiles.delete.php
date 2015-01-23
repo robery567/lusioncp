@@ -21,7 +21,8 @@
               WHERE
               `file_name` = '{$file_name}'
               ";
-              $affect = $db->query($query)->affected_rows;
+              $db->query($query);
+              $affect = $db->affected_rows;
               if($affect) {
                 insert_log($data['id'], 'Serverfile-ul ' . $file_name . ' a fost sters.');
                 success('Serverfile-ul a fost sters!', 'serverfiles.php', 5);

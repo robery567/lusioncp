@@ -21,7 +21,8 @@
 												WHERE
 													`username` = '{$user}'
 											";
-											$affect = $db->query($query)->affected_rows;
+											$db->query($query);
+											$affect = $db->affected_rows;
 											if($affect) {
 												insert_log($data['id'], 'Clientul ' . $user . ' a fost sters.');
 												success('Utilizatorul a fost șters cu succes!', 'clients.php', 5);
