@@ -47,9 +47,11 @@
 								<li>
 									<a href="serverfiles.php">Vezi serverfiles</a>
 								</li>
+								<!-- TBD
 								<li>
 									<a href="#">Vezi log-uri</a>
 								</li>
+							-->
 							</ul>
 						</li>
 						<?php
