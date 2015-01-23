@@ -82,7 +82,7 @@
                                 WHERE
                                     file_name = '{$cached_filename}'
                             ";
-                            $special = $db->query($query)->fetch_obj();
+                            $special = $db->query($query)->fetch_object();
 
                             ?>
                             <form action="serverfiles.php?action=install" method="post">
@@ -95,8 +95,8 @@
                                                     <option value="0" disabled>Ultimul serverfiles instalat:</option>
                                                     <option value="<?= $special->file_id ?>" selected><?= $special->file_name ?></option>
                                                     <option value="0" disabled>Alege alt serverfiles de pe listă:</option>
-                                                    <?php while($sf = $getsf->fetch_obj): ?>
-                                                    <option value="<?= $sf->file_id ?>"<?php if($sf->file_id == $special->file_id) ?> disabled<?php endif ?>><?= $sf->file_name ?></option>
+                                                    <?php while($sf = $getsf->fetch_object()): ?>
+                                                    <option value="<?= $sf->file_id ?>"<?php if($sf->file_id == $special->file_id): ?> disabled<?php endif ?>><?= $sf->file_name ?></option>
                                                     <?php endwhile; ?>
                                                 </select>
                                             </td>
