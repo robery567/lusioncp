@@ -59,8 +59,7 @@
 																'{$data['hostpass']}'
 															)";
 													$register = $db->query($query);
-													$check = $db->query("SELECT COUNT(*) AS nr FROM lcpc_clients WHERE username = '{$data['username']}'")->fetch_array(MYSQLI_ASSOC);
-													if ($check['nr']) {
+													if ($register->insert_id) {
 														insert_log($data['id'], 'Client nou adăugat cu succes');
 														success("Utilizatorul <strong>{$data['username']}</strong> a fost adăugat cu succes!", 'clients.php', 5);
 													} else {
