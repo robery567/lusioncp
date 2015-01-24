@@ -35,6 +35,11 @@ if (!isset($_SESSION['email']) && empty($_SESSION['email'])) {
 					<li><span class="label label-success">m2clean</span> - curata log-urile unui server de Metin2</li>
 				</ul>
 			</div>
+			<?php if (!ping($data['ip'])): ?>
+			<div class="alert alert-danger">
+				<p>Serverul din remote este offline!</p>
+			</div>
+			<?php endif; ?>
 			<div class="embed-responsive embed-responsive-16by9">
 				<iframe class="embed-responsive-item" src="//lusioncp.me/lcpdev/shcmd.php"></iframe>
 			</div>

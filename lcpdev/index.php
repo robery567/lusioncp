@@ -81,7 +81,6 @@ if(isset($_SESSION['email'])) {
 								$statement->fetch();
 								$_SESSION['username'] 	= $r_username;
 								$_SESSION['email'] 		= $r_email;
-								$_SESSION['server_ip'] 	= $r_ip;
 
 								if($r_lvl == 1) {
 									redirect('dashboard.php');

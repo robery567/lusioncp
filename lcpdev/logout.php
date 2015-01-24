@@ -25,7 +25,6 @@ if(isset($_SESSION['username']) && isset($_SESSION['previous_user'])) {
         unset($_SESSION['previous_user']);
         $_SESSION['username'] 	= $r_username;
         $_SESSION['email'] 		= $r_email;
-        $_SESSION['server_ip'] 	= $r_ip;
     } else {
         session_unset();
         session_destroy();

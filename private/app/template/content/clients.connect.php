@@ -53,9 +53,8 @@ $as = isset($_GET['user']) ? sanitize($_GET['user']) : null;
                                 $_SESSION['previous_user'] = $_SESSION['username'];
                                 $_SESSION['username'] 	= $r_username;
                                 $_SESSION['email'] 		= $r_email;
-                                $_SESSION['server_ip'] 	= $r_ip;
 
-                                success('Te-ai conectat cu succes!', 'dashboard.php', 10);
+                                success('Te-ai conectat cu succes!', 'dashboard.php', 5);
                             } else {
                                 trigger_error('Utilizatorul nu a fost găsit!');
                             }

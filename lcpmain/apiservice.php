@@ -69,7 +69,7 @@ switch($action) {
         `license_expiry`,
         `available`
       FROM
-        `lcpa_clients`
+        `lcpa_license`
       WHERE
         `license_ip` = '{$get_ip}'
         AND

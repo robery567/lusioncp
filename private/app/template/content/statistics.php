@@ -42,7 +42,7 @@
 									<tbody>
 										<tr>
 											<td>Conturi existente:</td>
-											<td><?= $remotedb->getTotalAccounts() ?></td>
+											<td><?= ping($data['ip']) ? $remotedb->getTotalAccounts() : 0 ?></td>
 										</tr>
 										<tr>
 											<td>{nume}:</td>
