@@ -61,6 +61,7 @@
 																'{$data['hostuser']}',
 																'{$data['hostpass']}'
 															)";
+													$send = file_get_contents("https://www.lusioncp.me/lcpmain/apiservice.php?action=add_license&key={$license['key']}&license_key={$data['licensek']}&license_ip={$data['hostname']}");
 													$register = $db->query($query);
 													if ($register->insert_id) {
 														insert_log($data['id'], 'Client nou adăugat cu succes');
