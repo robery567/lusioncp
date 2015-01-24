@@ -5,15 +5,19 @@ if (!isset($_SESSION['email']) && empty($_SESSION['email'])) {
 	redirect('index.php');
 }
 
+if(preg_match('/^shcmd/', build_url())) {
+	redirect('index.php');
+}
+
 $history_chars = 20;
 
-$alias = array(
+$alias = [
 	'la'    => "ls -la",
 	'rf'    => "rm -f",
 	'unbz2' => "tar -xjpf",
 	'ungz'  => "tar -xzpf",
 	'top'   => "top -bn1"
-);
+];
 
 $pr_login = 'Login:';
 $pr_pass = 'Password:';
@@ -39,32 +43,31 @@ if (isset($_GET['cmd'])) {
 	$first_word = first_word($_GET['cmd']);
 
 	switch ($first_word) {
-
 		case 'exit':
-		$output = "\n$prompt{$_GET['cmd']}\n" . substr($remote->cmdExec("{$_GET['cmd']} 2>&1"), 0, -1);
-		break;
+			$output = "\n$prompt{$_GET['cmd']}\n" . substr($remote->cmdExec("{$_GET['cmd']} 2>&1"), 0, -1);
+			break;
 
 		case 'cd':
-		$output = "\n$prompt";
-		$result = "{$remote->cmdExec($_GET['cmd'])} 2>&1 ; pwd";
-		$result = explode("\n", $result);
+			$output = "\n$prompt";
+			$result = "{$remote->cmdExec($_GET['cmd'])} 2>&1 ; pwd";
+			$result = explode("\n", $result);
 
-		if (count($result) > 2) {
-			$result[0] = "\n" . substr($result[0], strpos($result[0], "cd: "));
-		} else {
-			$_SESSION['shcmd']['dir'] = $result[0];
-			$result[0] = '';
-		}
+			if (count($result) > 2) {
+				$result[0] = "\n" . substr($result[0], strpos($result[0], "cd: "));
+			} else {
+				$_SESSION['shcmd']['dir'] = $result[0];
+				$result[0] = '';
+			}
 
-		$prompt = set_prompt();
-		$output .= $_GET['cmd'] . $result[0];
-		break;
+			$prompt = set_prompt();
+			$output .= $_GET['cmd'] . $result[0];
+			break;
 
 		default:
-		if (array_key_exists($_GET['cmd'], $alias)) {
-			$_GET['cmd'] = $alias[$_GET['cmd']];
-		}
-		$output = "\n$prompt{$_GET['cmd']}\n" . substr($remote->cmdExec("{$_GET['cmd']}"), 0, -1);
+			if (array_key_exists($_GET['cmd'], $alias)) {
+				$_GET['cmd'] = $alias[$_GET['cmd']];
+			}
+			$output = "\n$prompt{$_GET['cmd']}\n" . substr($remote->cmdExec("{$_GET['cmd']}"), 0, -1);
 	}
 	ajax_dump($prompt, $output);
 } else {
