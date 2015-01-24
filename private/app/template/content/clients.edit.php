@@ -29,18 +29,18 @@
 											WHERE
 												username = '{$user}'
 										";
-										$data = $db->query($query)->fetch_object();
+										$data2 = $db->query($query)->fetch_object();
 
 										if(isset($_POST['update'])) {
 											$form = [
-												'username' => isset($_POST['username']) ? sanitize($_POST['username']) : $data->useruser,
-												'password' => isset($_POST['password']) ? crypt_password($_POST['password']) : $data->userpass,
+												'username' => isset($_POST['username']) ? sanitize($_POST['username']) : $data2->useruser,
+												'password' => isset($_POST['password']) ? crypt_password($_POST['password']) : $data2->userpass,
 												'usermail' => isset($_POST['email']) ? (filter_var($_POST['email']) ? sanitize($_POST['email'], FILTER_VALIDATE_EMAIL) : false) : null,
-												'hostname' => isset($_POST['hostname']) ? sanitize($_POST['hostname']) : $data->hostname,
-												'hostuser' => isset($_POST['hostuser']) ? sanitize($_POST['hostuser']) : $data->hostuser,
-												'hostpass' => isset($_POST['hostpass']) ? sanitize($_POST['hostpass']) : $data->hostpass,
-												'hostport' => isset($_POST['hostport']) ? sanitize($_POST['hostport']) : $data->hostport,
-												'userrank' => isset($_POST['clearance']) ? sanitize($_POST['clearance']) : $data->user_level,
+												'hostname' => isset($_POST['hostname']) ? sanitize($_POST['hostname']) : $data2->hostname,
+												'hostuser' => isset($_POST['hostuser']) ? sanitize($_POST['hostuser']) : $data2->hostuser,
+												'hostpass' => isset($_POST['hostpass']) ? sanitize($_POST['hostpass']) : $data2->hostpass,
+												'hostport' => isset($_POST['hostport']) ? sanitize($_POST['hostport']) : $data2->hostport,
+												'userrank' => isset($_POST['clearance']) ? sanitize($_POST['clearance']) : $data2->user_level,
 											];
 
 											$query = "
@@ -91,7 +91,7 @@
 												</tr>
 												<tr>
 													<td>Email:</td>
-													<td><input type="email" name="email" value="<?= $data->usermail ?>"></td>
+													<td><input type="email" name="email" value="<?= $data2->usermail ?>"></td>
 												</tr>
 												<tr>
 													<td>Parola:</td>
@@ -99,15 +99,15 @@
 												</tr>
 												<tr>
 													<td>Hostname:</td>
-													<td><input type="text" name="hostname" value="<?= $data->hostname ?>"></td>
+													<td><input type="text" name="hostname" value="<?= $data2->hostname ?>"></td>
 												</tr>
 												<tr>
 													<td>User:</td>
-													<td><input type="text" name="hostuser" value="<?= $data->hostuser ?>"></td>
+													<td><input type="text" name="hostuser" value="<?= $data2->hostuser ?>"></td>
 												</tr>
 												<tr>
 													<td>Parola:</td>
-													<td><input type="password" name="hostpass" value="<?= $data->hostpass ?>"></td>
+													<td><input type="password" name="hostpass" value="<?= $data2->hostpass ?>"></td>
 												</tr>
 												<tr>
 													<td>Nivel de acces:</td>
