@@ -15,8 +15,21 @@ class Remote {
 		$this->ssh = new Net_SSH2($this->_hostname);
 		$this->ssh->enableQuietMode();
 
-		if(ping($this->_hostname)) {
-			 $this->ssh->login($this->_username, $this->_password);
+		try {
+			if(ping($this->_hostname)) {
+				$this->ssh->login($this->_username, $this->_password);
+			} else {
+				throw new Exception('__CONN_ERR__');
+			}
+		} catch (Exception $e) {
+			switch ($e->getMessage()) {
+				case '__CONN_ERR__':
+					return 'The connection to remote server has failed';
+					break;
+				default:
+					return '__UNKNOWN__';
+					break;
+			}
 		}
 		unset($this->_password);
 		unset($password);
