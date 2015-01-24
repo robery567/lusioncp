@@ -20,6 +20,7 @@ require __LCP_APP__ . '/vendor/autoload.php';
 require __DIR__ . '/functions.php';
 
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__.'/../config/license.php';
 
 require __DIR__ . '/../class/Network/Remote.class.php';
 require __DIR__ . '/../class/Network/RemoteDatabase.class.php';
@@ -78,4 +79,23 @@ if(isset($_SESSION['email'])) {
 	} else {
 		$offline=1;
 	}
+}
+
+$apiservice = file_get_contents('https://www.lusioncp.me/lcpmain/apiservice.php?action=check&ip=' . $license['ip'] . '&key=' . $license['key']);
+
+switch ($apiservice) {
+	case 'valid':
+		continue;
+		break;
+
+	case 'invalid period':
+	case 'invalid ip':
+	case 'invalid key':
+		redirect('https://www.lusioncp.me/lcpmain/banned.php');
+		exit();
+		break;
+
+	default:
+		echo 'Something went terribly wrong.';
+		exit();
 }
