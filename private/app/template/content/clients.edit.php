@@ -68,8 +68,9 @@
 													WHERE
 														username = '{$user}'
 												";
-                        $sql = $db->query($query);
-												if($sql->insert_id) {
+
+                        						$update = $db->query($query);
+												if($update) {
 													insert_log($data['id'], 'Clientul <strong>' . $user . '</strong> a fost modificat.');
 													success("Utilizatorul <strong>{$user}</strong> a fost actualizat cu succes!", 'clients.php', 5);
 												} else {

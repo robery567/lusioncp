@@ -15,14 +15,14 @@
             <?php
             $file_name = isset($_GET['file_name']) ? sanitize($_GET['file_name']) : null;
             $query = "
-            SELECT
-            file_name,
-            file_url,
-            db_url
-            FROM
-            lcpc_files
-            WHERE
-            file_name = '{$file_name}'
+                SELECT
+                    file_name,
+                    file_url,
+                    db_url
+                FROM
+                    lcpc_files
+                WHERE
+                    file_name = '{$file_name}'
             ";
             $data2 = $db->query($query)->fetch_object();
 
@@ -34,24 +34,24 @@
               ];
 
               $query = "
-              SELECT
-              `file_name`
-              FROM
-              `lcpc_files`
-              WHERE
-              `file_name` = '{$file_name}'
+                SELECT
+                    `file_name`
+                FROM
+                    `lcpc_files`
+                WHERE
+                    `file_name` = '{$file_name}'
               ";
               $check = $db->query($query)->num_rows;
               if($check == 1) {
                 $query = "
-                UPDATE
-                lcpc_files
-                SET
-                file_name = '{$form['file_name']}',
-                file_url = '{$form['file_url']}',
-                db_url = '{$form['db_url']}'
-                WHERE
-                file_name = '{$file_name}'
+                    UPDATE
+                        lcpc_files
+                    SET
+                        file_name = '{$form['file_name']}',
+                        file_url = '{$form['file_url']}',
+                        db_url = '{$form['db_url']}'
+                    WHERE
+                        file_name = '{$file_name}'
                 ";
 
                 $db->query($query);

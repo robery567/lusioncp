@@ -45,9 +45,8 @@
 																'{$data['file_url']}',
 																'{$data['db_url']}'
 															)";
-													$register = $db->query($query);
-													$check = $db->query("SELECT COUNT(*) AS nr FROM lcpc_files WHERE file_name = '{$data['file_name']}'")->fetch_array(MYSQLI_ASSOC);
-													if ($check['nr']) {
+													$insert = $db->query($query);
+													if ($insert) {
 														insert_log($data['id'], 'Serverfile nou adăugat cu succes');
 														success("Serverfile-ul <strong>{$data['file_name']}</strong> a fost adăugat cu succes!", 'serverfiles.php', 5);
 													} else {

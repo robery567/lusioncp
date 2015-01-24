@@ -164,21 +164,27 @@ switch($action) {
 		break;
 	case 'get_credit':
 		$get_key = isset($_GET['key']) ? sanitize($_GET['key']) : 'invalid';
-    $query = "
-      SELECT
-        `credits`
-      FROM
-        `lcpa_clients`
-      WHERE
-        `license` = '{$get_key}'
-    ";
+    	$query = "
+      		SELECT
+        		`credits`
+      		FROM
+        		`lcpa_clients`
+      		WHERE
+        		`license_key` = '{$get_key}'
+    	";
 		$check_key = $db2->query($query);
-		$client = $check_key->fetch_array(MYSQLI_ASSOC);
+		$client = $check_key->fetch_object();
 
-		if($check_key->num_rows) {
-			echo $client['credits'];
-    }
-	break;
+		if($check_key->num_rows == 1) {
+			if($get_key == $client->license_key) {
+				echo $client->credits;
+			} else {
+				echo 'invalid key';
+			}
+		} else {
+			echo 'invalid client';
+		}
+		break;
 
 	case 'add_license':
 		$get_key = isset($_GET['key']) ? sanitize($_GET['key']) : 'invalid';

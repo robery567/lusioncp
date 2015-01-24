@@ -7,7 +7,7 @@
 				<div class="col-lg-8">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<i class="fa fa-user fa-fw"></i> Clienți (Credit: <?php echo reseller_credit($mysql['license_key']); ?>)
+							<i class="fa fa-user fa-fw"></i> Clienți (Credit: <?php echo reseller_credit($license['key']); ?>)
 							<div class="pull-right">
 								<div class="btn-group">
 									<button type="button"
@@ -42,7 +42,8 @@
 												<?php
 													$id = 1;
 													$fetch = $db->query("SELECT username, email, server_ip, is_installed FROM lcpc_clients");
-													while($client = $fetch->fetch_object()):
+													if($fetch->num_rows > 0):
+														while($client = $fetch->fetch_object()):
 												?>
 												<tr>
 													<td><?= $id++ ?></td>
@@ -77,6 +78,11 @@
 												<?php
 													endwhile;
 												?>
+												<?php else: ?>
+												<tr>
+													<td colspan="7">Momentan nu există niciun client.</td>
+												</tr>
+												<?php endif; ?>
 											</tbody>
 										</table>
 									</div>

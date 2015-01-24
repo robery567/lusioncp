@@ -61,4 +61,19 @@ class RemoteDatabase extends Remote {
         ";
         return $this->rdb->query($query);
     }
+
+    public function getTotalGuilds() {
+        $query = "
+            SELECT
+                COUNT(login)
+            FROM
+                player.guilds
+        ";
+
+        return $this->rdb->query($query);
+    }
+
+    public function getDailyOnlinePlayers() {
+
+    }
 }

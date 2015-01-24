@@ -45,12 +45,12 @@
 											<td><?= ping($data['ip']) ? $remotedb->getTotalAccounts() : 0 ?></td>
 										</tr>
 										<tr>
-											<td>{nume}:</td>
-											<td>{valoare}</td>
+											<td>Bresle creeate:</td>
+											<td><?= ping($data['ip']) ? $remotedb->getTotalGuilds() : 0 ?></td>
 										</tr>
 										<tr>
-											<td>{nume}:</td>
-											<td>{valoare}</td>
+											<td>Jucători online (24h):</td>
+											<td><?= ping($data['ip']) ? $remotedb->getDailyOnlinePlayers() : 0 ?></td>
 										</tr>
 									</tbody>
 								</table>

@@ -41,11 +41,12 @@
                 <?php
                 $id = 1;
                 $fetch = $db->query("
-                  SELECT
-                    file_name AS name,
-                    file_url AS url,
-                    db_url AS urld
-                    FROM lcpc_files
+                    SELECT
+                        file_name AS name,
+                        file_url AS url,
+                        db_url AS urld
+                    FROM
+                        lcpc_files
                 ");
                 while($client = $fetch->fetch_object()):
                   ?>
