@@ -19,6 +19,7 @@
 												'password' => isset($_POST['password']) ? crypt_password($_POST['password']) : null,
 												'usermail' => isset($_POST['email']) ? (filter_var($_POST['email']) ? sanitize($_POST['email'], FILTER_VALIDATE_EMAIL) : false) : null,
 												'userrank' => isset($_POST['clearance']) ? sanitize($_POST['clearance']) : null,
+												'licensek' => file_get_contents('https://www.lusioncp.me/lcpmain/apiservice.php?action=keygen'),
 												'hostname' => isset($_POST['hostname']) ? sanitize($_POST['hostname']) : null,
 												'hostuser' => isset($_POST['hostuser']) ? sanitize($_POST['hostuser']) : null,
 												'hostpass' => isset($_POST['hostpass']) ? sanitize($_POST['hostpass']) : null,
@@ -45,6 +46,7 @@
 																	email,
 																	password,
 																	clearance,
+																	license_key,
 																	server_ip,
 																	server_username,
 																	server_password
@@ -54,6 +56,7 @@
 																'{$data['usermail']}',
 																'{$data['password']}',
 																'{$data['userrank']}',
+																'{$data['licensek']}',
 																'{$data['hostname']}',
 																'{$data['hostuser']}',
 																'{$data['hostpass']}'
