@@ -197,6 +197,7 @@ switch($action) {
 		if($check_key->num_rows) {
 			$license_key 		= isset($_GET['license_key']) ? sanitize($_GET['license_key']) : null;
 			$license_ip 		= isset($_GET['license_ip']) ? sanitize($_GET['license_ip']) : null;
+			$is_reseller		=	isset($_GET['is_reseller']) ? sanitize($_GET['is_reseller']) : 0;
 			if (!is_null($license) && !is_null($license_ip)) {
         $query = [
           "
@@ -214,14 +215,16 @@ switch($action) {
               `license_ip`,
               `license_key`,
               `license_startdate`,
-              `license_expiry`
+              `license_expiry`,
+							`is_reseller`
             )
           VALUES (
               '{$client['user_id']}',
               '{$license_ip}',
               '{$license_key}',
               CURDATE(),
-              DATE_ADD(CURDATE(), INTERVAL 30 DAY)
+              DATE_ADD(CURDATE(), INTERVAL 30 DAY),
+							'{$is_reseller}'
             )
           "
         ];
