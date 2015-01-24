@@ -189,7 +189,7 @@ switch($action) {
       FROM
         `lcpa_clients`
       WHERE
-        `license` = '{$get_key}'
+        `license` = '{$get_key}' AND is_reseller='1'
     ";
 		$check_key = $db2->query($query);
 		$client = $check_key->fetch_array(MYSQLI_ASSOC);
