@@ -14,6 +14,16 @@ function sanitize($var) {
 	return $var;
 }
 
+function build_url() {
+	$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? 'https' : 'http';
+	$hostname = (isset($_SERVER['HTTP_HOST'])) ? $_SERVER['HTTP_HOST'] : getenv('HTTP_HOST');
+	$pathname = (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : getenv('REQUEST_URI');
+	$getquery = (isset($_SERVER['QUERY_STRING'])) ? $_SERVER['QUERY_STRING'] : getenv('QUERY_STRING');
+
+	$uri = $protocol . $hostname . $pathname . $getquery;
+	return $uri;
+}
+
 function server_ip($username) {
 	global $db;
 	$data = $db->query("SELECT server_ip FROM lcpc_clients WHERE username='{$username}'")->fetch_row();
