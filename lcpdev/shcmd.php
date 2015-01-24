@@ -16,7 +16,11 @@ $alias = [
 	'rf'    => "rm -f",
 	'unbz2' => "tar -xjpf",
 	'ungz'  => "tar -xzpf",
-	'top'   => "top -bn1"
+	'top'   => "top -bn1",
+	'm2start' => 'cd /usr/home/metin2 && ./start',
+	'm2stop' => 'cd /usr/home/metin2 && ./stop',
+	'm2restart' => 'cd /usr/home/metin2 && ./stop && cd /usr/home/metin2 && ./start',
+	'm2clear' => 'cd /usr/home/metin2 && ./stop && cd /usr/home/metin2 && ./clear && cd /usr/home/metin2 && ./start',
 ];
 
 $pr_login = 'Login:';

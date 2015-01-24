@@ -21,6 +21,20 @@ if (!isset($_SESSION['email']) && empty($_SESSION['email'])) {
 		</nav>
 
 		<div id="page-wrapper">
+			<div class="alert alert-info">
+				<p>Există comenzi simplificate, iată o mică listă:</p>
+				<ul>
+					<li><span class="label label-default">la {folder}</span> - afisează toate fisierele dintr-un director</li>
+					<li><span class="label label-default">rf {folder}</span> - sterge un folder</li>
+					<li><span class="label label-default">unbz2 {arhiva}</span> - dezarhiveaza o arhiva .tar.bz2 in folderul curent</li>
+					<li><span class="label label-default">ungz {arhiva}</span> - dezarhiveaza o arhiva .tar.gz sau .tgz in folderul curent</li>
+					<li><span class="label label-default">top</span> - indica procesele active</li>
+					<li><span class="label label-success">m2start</span> - porenste un server de Metin2</li>
+					<li><span class="label label-success">m2restart</span> - reporneste un server de Metin2</li>
+					<li><span class="label label-success">m2stop</span> - opreste un server de Metin2</li>
+					<li><span class="label label-success">m2clean</span> - curata log-urile unui server de Metin2</li>
+				</ul>
+			</div>
 			<div class="embed-responsive embed-responsive-16by9">
 				<iframe class="embed-responsive-item" src="//lusioncp.me/lcpdev/shcmd.php"></iframe>
 			</div>
