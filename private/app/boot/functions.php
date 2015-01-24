@@ -155,6 +155,6 @@ function success($message, $redirect = "dashboard.php", $time = 3) {
 	echo $string;
 }
 
-function reseller_credit($license_key) {
-		return file_get_contents("https://www.lusioncp.me/lcpmain/apiservice.php?action=get_credit&key={$license_key}");
+function reseller_credit($license) {
+	return file_get_contents("https://www.lusioncp.me/lcpmain/apiservice.php?action=get_credit&key={$license}");
 }

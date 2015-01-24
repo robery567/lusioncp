@@ -5,5 +5,4 @@
 		'password' 			=> 'Hg7RvOqZdH',
 		'database' 			=> 'lcp_client',
 		'connection_type' 	=> 'mysqli',
-		'license_key' 		=> 'marcel123ion'
 	];
