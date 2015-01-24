@@ -33,20 +33,20 @@ function strrand($string) {
 	$rand_n = mt_rand(1, 26);
 	$number = $rand_n % 26;
 
-	if(!$n) {
+	if(!$number) {
 		return $string;
 	}
 
-	if ($n == 13) {
+	if ($number == 13) {
 		return str_rot13($string);
 	}
 
 	for ($i = 0; $i < strlen($string); $i++) {
 		$char = $string[$i];
 		if ($char >= 'a' && $char <= 'z') {
-			$string[$i] = $letters[(ord($char) - 71 + $n) % 26];
+			$string[$i] = $letters[(ord($char) - 71 + $number) % 26];
 		} else if ($char >= 'A' && $char <= 'Z') {
-			$string[$i] = $letters[(ord($char) - 39 + $n) % 26 + 26];
+			$string[$i] = $letters[(ord($char) - 39 + $number) % 26 + 26];
 		}
 	}
 
@@ -166,7 +166,8 @@ switch($action) {
 		$get_key = isset($_GET['key']) ? sanitize($_GET['key']) : 'invalid';
     	$query = "
       		SELECT
-        		`credits`
+        		`credits`,
+				`license_key`
       		FROM
         		`lcpa_clients`
       		WHERE
@@ -174,6 +175,7 @@ switch($action) {
     	";
 		$check_key = $db2->query($query);
 		$client = $check_key->fetch_object();
+
 
 		if($check_key->num_rows == 1) {
 			if($get_key == $client->license_key) {
@@ -195,7 +197,7 @@ switch($action) {
       FROM
         `lcpa_clients`
       WHERE
-        `license` = '{$get_key}'
+        `license_key` = '{$get_key}'
     ";
 		$check_key = $db2->query($query);
 		$client = $check_key->fetch_array(MYSQLI_ASSOC);
@@ -204,7 +206,7 @@ switch($action) {
 			$license_key 		= isset($_GET['license_key']) ? sanitize($_GET['license_key']) : null;
 			$license_ip 		= isset($_GET['license_ip']) ? sanitize($_GET['license_ip']) : null;
 			$is_reseller		=	isset($_GET['is_reseller']) ? sanitize($_GET['is_reseller']) : 0;
-			if (!is_null($license) && !is_null($license_ip)) {
+			if (!is_null($license_key) && !is_null($license_ip)) {
         $query = [
           "
           UPDATE
@@ -212,7 +214,7 @@ switch($action) {
           SET
             `credits` = `credits` - 2
           WHERE
-            `license` = '{$get_key}'
+            `license_key` = '{$get_key}'
           ",
           "
           INSERT INTO
@@ -249,7 +251,7 @@ switch($action) {
 			'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
 		];
 
-		echo hash('sha512', strrand(hash('md5', $salt)));
+		echo hash('sha512', strrand(hash('md5', $options['salt'])));
 		break;
 
 	case 'sync_license':
