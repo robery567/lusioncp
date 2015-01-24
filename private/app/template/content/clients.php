@@ -70,6 +70,9 @@
 																<li>
 																	<a href="clients.php?action=delete&amp;user=<?= $client->username ?>"><i class="fa fa-remove"></i> Șterge</a>
 																</li>
+																<li>
+																	<a href="clients.php?action=connect&amp;user=<?= $client->username ?>"><i class="fa fa-wrench"></li> Conectare ca...</a>
+																</li>
 															</ul>
 														</div>
 													</td>

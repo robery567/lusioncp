@@ -33,6 +33,9 @@ if (!isset($_SESSION['email']) && empty($_SESSION['email'])) {
 					case 'delete':
 						require __LCP_APP__ . '/app/template/content/clients.delete.php';
 						break;
+					case 'connect':
+						require __LCP_APP__ . '/app/template/content/clients.connect.php';
+						break;
 					default:
 						require __LCP_APP__ . '/app/template/content/clients.php';
 				endswitch;
