@@ -13,21 +13,26 @@
 
 # Function for fetching the data
 download() {
-    fetch --no-verify-peer $1 -output=$2
+  fetch --no-verify-peer "$1" -output="$2"
 }
 
-LCPROOT = "/root/lcp"
+update_procent() {
+  fetch --no-verify-peer "https://www.lusioncp.me/lcpdev/client_install.php?action=install_percent&percent=$1"
+}
+
+LCPROOT="/root/lcp"
+VERSION="uname -r | cut -c1"
 
 # Checking if FreeBSD or not
-if [ `uname -s` == 'FreeBSD' ]; then
-    type = 'bsd'
+if [ "$(uname -s)" == 'FreeBSD' ]; then
+  type='bsd'
 fi
 
 # TODO: check FreeBSD version
 
-if [ -z "$type" ]; then
-    echo 'Error: currently only FreeBSD 9 or 10 is supported'
-    exit 1
+if [ "$VERSION" != '8' ] && ["$VERSION" != 1] && ["$VERSION" != 9]; then
+  echo 'Error: currently only FreeBSD 9 or 10 is supported'
+  exit 1
 fi
 
 # This makes the 1% of installation
@@ -39,7 +44,7 @@ mkdir install
 mkdir backup
 touch setup.log
 cd $LCPROOT/install
-download $CLIENTPROC'?action=install_percent&percent=1' install.1
+update_procent 1
 cd $LCPROOT
 
 download https://www.lusioncp.me/download/lcp-install-$type lcp-install-$type
