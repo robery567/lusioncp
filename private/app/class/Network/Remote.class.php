@@ -103,4 +103,20 @@ class Remote {
 		$this->ssh->exec('service mysql-server start');
 		$this->ssh->exec('./usr/home/metin2/start.sh');
 	}
+
+	public function doGameAction($action) {
+		switch ($action) {
+			case 'start':
+				return $this->ssh->exec('cd /usr/home/metin2 && ./start.sh');
+			case 'stop':
+				return $this->ssh->exec('cd /usr/home/metin2 && ./stop.sh');
+			case 'restart':
+				return $this->ssh->exec('cd /usr/home/metin2 && ./stop.sh && ./start.sh');
+			case 'reboot':
+				return $this->sysRestart();
+				break;
+			default:
+				break;
+		}
+	}
 }
