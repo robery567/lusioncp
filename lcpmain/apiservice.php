@@ -1,6 +1,7 @@
 <?php
 
 require __DIR__ . '/../../private/app/boot/functions.php';
+require __DIR__ . '/../../private/internal/lcp-install-template.php';
 
 try {
 	$db2 = new mysqli('localhost', 'lcp_adevel', 'RxxlRN1yCy', 'lcp_admin');
@@ -355,6 +356,11 @@ switch($action) {
 		} else {
 			echo 'invalid license';
 		}
+		break;
+
+	case 'deploy_bash':
+		$company_url = '';
+		echo $content;
 		break;
 	default:
 		echo 'invalid action';

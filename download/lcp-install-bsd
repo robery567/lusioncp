@@ -2,12 +2,10 @@
 
 #
 #	LusionCP Install Script
-#	V1.7 Beta
+#	V1.7
 #
 
 # Variables
-CLIENTPROC="https://www.lusioncp.me/lcpdev/client_install.php"
-DOWNLOAD="https://www.lusioncp.me/download/"
 LIBNAMEINTEL="lib-lcp-x86.tar.gz"
 LIBNAMEAMD="lib-lcp-x64.tar.gz"
 CPUTYPE=$(uname -m)
