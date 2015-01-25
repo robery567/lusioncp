@@ -6,17 +6,17 @@
 #
 
 # Variables
-CLIENTPROC = "https://www.lusioncp.me/lcpdev/client_install.php"
-DOWNLOAD = "https://www.lusioncp.me/download/"
-LIBNAMEINTEL = "lib-lcp-x86.tar.gz"
-LIBNAMEAMD = "lib-lcp-x64.tar.gz"
-CPUTYPE = $(uname -m)
-SQLFILE = ".lcpsql"
-LCPROOT = "/root/lcp"
+CLIENTPROC="https://www.lusioncp.me/lcpdev/client_install.php"
+DOWNLOAD="https://www.lusioncp.me/download/"
+LIBNAMEINTEL="lib-lcp-x86.tar.gz"
+LIBNAMEAMD="lib-lcp-x64.tar.gz"
+CPUTYPE=$(uname -m)
+SQLFILE=".lcpsql"
+LCPROOT="/root/lcp"
 
 # Function for fetching the data
 download() {
-	fetch --no-verify-peer $1 -output=$2
+	fetch --no-verify-peer "$1" -output="$2"
 }
 
 download https://www.lusioncp.me/download/lcp-install-bsd
@@ -56,20 +56,19 @@ download $CLIENTPROC'?action=install_percent&percent=75' install.75
 cd $LCPROOT
 
 cd /usr
-if [ $CPUTYPE  ==  "amd64" ]; then
+if [ "$CPUTYPE"  ==  "amd64" ]; then
 	download $DOWNLOAD$LIBNAMEAMD
 	tar -zxvf $LIBNAMEAMD
 	rm $LIBNAMEAMD
-elif [ $CPUTYPE == "i386" ]; then
+elif [ "$CPUTYPE" == "i386" ]; then
     download $DOWNLOAD$LIBNAMEINTEL
 	tar -zxvf $LIBNAMEINTEL
 	rm $LIBNAMEINTEL
 fi
 
-# TODO: fixme
 # Checking if MySQL Service is up and running
 cd $LCPROOT
-if [ ps ax | grep -v grep | grep mysql > /dev/null ];
+if [ "$(service mysql-server status | cut -c10-16)" == 'running' ];
 then
 	echo "MySQL is running, no start required" >> $LCPROOT/setup.log
 else
