@@ -12,12 +12,13 @@
 #
 
 # Function for fetching the data
+CLIENTPROC="https://www.lusioncp.me/lcpdev/client_install.php"
 download() {
   fetch --no-verify-peer "$1" -output="$2"
 }
 
 update_procent() {
-  fetch --no-verify-peer "https://www.lusioncp.me/lcpdev/client_install.php?action=install_percent&percent=$1"
+  fetch --no-verify-peer "$CLIENTPROC?action=install_percent&percent=$1"
 }
 
 LCPROOT="/root/lcp"
@@ -30,7 +31,7 @@ fi
 
 # TODO: check FreeBSD version
 
-if [ "$VERSION" != '8' ] && ["$VERSION" != 1] && ["$VERSION" != 9]; then
+if [ "$VERSION" != '8' ] && [ "$VERSION" != '1' ] && [ "$VERSION" != 9 ]; then
   echo 'Error: currently only FreeBSD 9 or 10 is supported'
   exit 1
 fi
