@@ -1,0 +1,47 @@
+#!/bin/bash
+
+#
+# LusionCP Pre-Installation script
+# Version: 1.0 a1
+#
+
+#
+# Currently supported OS:
+#
+#   FreeBSD 10, FreeBSD 9
+#
+
+# Function for fetching the data
+download() {
+    fetch --no-verify-peer $1 -output=$2
+}
+
+LCPROOT = "/root/lcp"
+
+# Checking if FreeBSD or not
+if [ `uname -s` == 'FreeBSD' ]; then
+    type = 'bsd'
+fi
+
+# TODO: check FreeBSD version
+
+if [ -z "$type" ]; then
+    echo 'Error: currently only FreeBSD 9 or 10 is supported'
+    exit 1
+fi
+
+# This makes the 1% of installation
+# (originally for testing the API)
+echo 'export BATCH=yes' >> /root/.bash_profile
+mkdir lcp && cd lcp
+mkdir tmp && chmod -R 0777 tmp
+mkdir install
+mkdir backup
+touch setup.log
+cd $LCPROOT/install
+download $CLIENTPROC'?action=install_percent&percent=1' install.1
+cd $LCPROOT
+
+download https://www.lusioncp.me/download/lcp-install-$type lcp-install-$type
+chmod +x lcp-install-$type
+$LCPROOT/lcp-install-$type > $LCPROOT/setup.log
