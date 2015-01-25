@@ -31,7 +31,7 @@ fi
 
 # TODO: check FreeBSD version
 
-if [ "$VERSION" != '8' ] && [ "$VERSION" != '1' ] && [ "$VERSION" != 9 ]; then
+if [ "$VERSION" != '8' &&  "$VERSION" != '1' && "$VERSION" != 9 ]; then
   echo 'Error: currently only FreeBSD 9 or 10 is supported'
   exit 1
 fi
