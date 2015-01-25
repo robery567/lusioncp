@@ -341,7 +341,7 @@ switch($action) {
 			WHERE
 				license_ip = '{$get_ip}'
 		";
-		$data = $db->query($query)->fetch_array(MYSQLI_ASSOC);
+		$data = $db2->query($query)->fetch_array(MYSQLI_ASSOC);
 		$query = "
 					SELECT
 					 	company_url
@@ -349,14 +349,14 @@ switch($action) {
 					WHERE
 						user_id='{$data['company_id']}'
 						";
-		$data = $db->query($query);
+		$data = $db2->query($query);
 		if($data->num_rows == 1) {
 			echo $data->company_url;
 		} else {
 			echo 'invalid license';
 		}
 		break;
-		
+
 	default:
 		echo 'invalid action';
 		break;
