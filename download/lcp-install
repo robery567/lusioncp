@@ -48,6 +48,7 @@ cd $LCPROOT/install
 update_procent 1
 cd $LCPROOT
 
+cd $LCPROOT
 fetch --no-verify-peer https://www.lusioncp.me/download/lcp-install-$type
 chmod +x lcp-install-$type
 sh lcp-install-$type > $LCPROOT/setup.log
