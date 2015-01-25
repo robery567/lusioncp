@@ -1,7 +1,6 @@
 # LusionCP Development Roadmap
 ========
-**NOTA:** Acest roadmap este unul instabil. Se poate modifica oricand.
-Daca nu respecti acest roadmap, te asteapta :hocho: !!!
+> **NOTA:** Acest roadmap este unul instabil. Se poate modifica oricand. Daca nu respecti acest roadmap, te asteapta :hocho: !!!
 
 ## LusionCP v1
 ========
@@ -56,12 +55,11 @@ Daca nu respecti acest roadmap, te asteapta :hocho: !!!
     - Admin:
         - Acces admin la utilitarul ``lusion``
         - Noutati LusionCP + ce are utilizatorul
-========
 
 ## LusionCP v2
 ========
-**NOTA:** LusionCP versiunea 2 este foarte instabil. Un singur lucru de spus: v2 este v1 in OOP + functii noi
-Deoarece lcpv2 va fi next-gen, va folosi librarii mai noi si mai stabile.
+> **NOTA:** LusionCP versiunea 2 este foarte instabil. Un singur lucru de spus: v2 este v1 in OOP + functii noi. Deoarece lcpv2 va fi next-gen, va folosi librarii mai noi si mai stabile.
+
 - Target:
     - FreeBSD 8, 9, 10
     - Linux (Ubuntu 14.04, 14.10, 15.04)
@@ -70,6 +68,6 @@ Deoarece lcpv2 va fi next-gen, va folosi librarii mai noi si mai stabile.
     - Mai multe interfete grafice!
     - Web host manager
     - Web host control panel
-    - ---Mailing control panel---
-    - ---File hosting panel---
-    - ---Windows Server (???)---
+    - Mailing control panel (???)
+    - File hosting panel (???)
+    - Windows Server (???)
