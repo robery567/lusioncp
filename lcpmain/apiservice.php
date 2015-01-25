@@ -335,12 +335,20 @@ switch($action) {
 	case 'get_company_url':
 		$query = "
 			SELECT
-				company_url
+				company_id
 			FROM
 				lcpa_license
 			WHERE
-				license_key = '{$get_ip}'
+				license_ip = '{$get_ip}'
 		";
+		$data = $db->query($query)->fetch_array(MYSQLI_ASSOC);
+		$query = "
+					SELECT
+					 	company_url
+					FROM lcpa_clients
+					WHERE
+						user_id='{$data['company_id']}'
+						";
 		$data = $db->query($query);
 		if($data->num_rows == 1) {
 			echo $data->company_url;
