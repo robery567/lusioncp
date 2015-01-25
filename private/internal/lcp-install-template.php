@@ -1,4 +1,19 @@
 <?php
+if(function_exists('apache_request_headers')) {
+  $headers = apache_request_headers();
+} else {
+  $headers = $_SERVER;
+}
+
+if(array_key_exists('X-Forwarded-For', $headers) && filter_var($headers['X-Forwarded-For'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+  $the_ip = $headers['X-Forwarded-For'];
+} else if(array_key_exists('HTTP_X_FORWARDED_FOR', $headers) && filter_var($headers['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+  $the_ip = $headers['HTTP_X_FORWARDED_FOR'];
+} else {
+  $the_ip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
+}
+
+$company_url = file_get_contents("https://www.lusioncp.me/lcpmain/apiservice.php?action=get_company_url&ip={$the_ip}");
 
 $content = '
 #!/bin/bash
