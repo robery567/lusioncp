@@ -15,8 +15,8 @@ class RemoteDatabase extends Remote {
 
         parent::__construct();
 
-        $this->_sql_user = $this->cmdExec('cat /root/.lcpsql | grep "user: " | cut -c 7-15');
-        $this->_sql_pass = $this->cmdExec('cat /root/.lcpsql | grep "pass: " | cut -c 7-38');
+        $this->_sql_user = $this->cmdExec('cat /root/lcp/.lcpsql | grep "user: " | cut -c 7-15');
+        $this->_sql_pass = $this->cmdExec('cat /root/lcp/.lcpsql | grep "pass: " | cut -c 7-38');
 
         try {
             $this->rdb = new MySQLi(
@@ -38,16 +38,16 @@ class RemoteDatabase extends Remote {
         } catch(Exception $e) {
             switch($e->getMessage()) {
                 case 'CONNECT_ERROR':
-                    echo '__CONNECT_ERROR__';
-                break;
+                    return '__CONNECT_ERROR__';
+                    break;
 
                 case 'CORRUPT_DATABASE':
-                    echo '__CORRUPT_DATABASE__';
-                break;
+                    return '__CORRUPT_DATABASE__';
+                    break;
 
                 default:
-                    echo '__UNKNOWN__';
-                break;
+                    return '__UNKNOWN__';
+                    break;
             }
         }
     }
