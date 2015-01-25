@@ -356,11 +356,7 @@ switch($action) {
 			echo 'invalid license';
 		}
 		break;
-
-	case 'deploy_bash':
-		$company_url = '';
-		echo $content;
-		break;
+		
 	default:
 		echo 'invalid action';
 		break;
