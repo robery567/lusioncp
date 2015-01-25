@@ -1,7 +1,6 @@
 <?php
 
 require __DIR__ . '/../../private/app/boot/functions.php';
-require __DIR__ . '/../../private/internal/lcp-install-template.php';
 
 try {
 	$db2 = new mysqli('localhost', 'lcp_adevel', 'RxxlRN1yCy', 'lcp_admin');
