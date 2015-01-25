@@ -40,101 +40,27 @@
 					</div>
 				</div>
 		<?php } else {
+					if ($action == "reboot" && !$offline) {
+						$remote->doGameAction('reboot');
+						insert_log($data['id'], "Reboot VPS", $db);
+						echo '<meta http-equiv="refresh" content="0; url=dashboard.php">';
+					}
+					if ($action == "stop" && !$offline) {
+						$remote->doGameAction('stop');
+						insert_log($data['id'], "Oprire server Metin2", $db);
+						echo '<meta http-equiv="refresh" content="0; url=dashboard.php">';
+					}
+					if ($action == "start" && !$offline) {
+						$remote->doGameAction('start');
+						insert_log($data['id'], "Pornire server Metin2", $db);
+						echo '<meta http-equiv="refresh" content="0; url=dashboard.php">';
+					}
 					if ($action == "restart" && !$offline) {
-						$remote->cmdExec('shutdown -r now');
-						insert_log($data['id'], "Restart Server", $db);
+						$remote->doGameAction('restart');
+						insert_log($data['id'], "Restart server Metin2", $db);
 						echo '<meta http-equiv="refresh" content="0; url=dashboard.php">';
 					}
 				?>
-				<div class="col-lg-3 col-md-6">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="fa fa-exchange fa-5x"></i>
-								</div>
-								<div class="col-xs-9 text-right">
-									<div class="huge">[buton 1]</div>
-									<div>[Meniu 1 ]</div>
-								</div>
-							</div>
-						</div>
-						<a href="#">
-							<div class="panel-footer">
-								<span class="pull-left">[detalii]</span>
-								<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-								<div class="clearfix"></div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="panel panel-green">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="fa fa-tasks fa-5x"></i>
-								</div>
-								<div class="col-xs-9 text-right">
-									<div class="huge">[ buton 2 ]</div>
-									<div>[meniu 2]</div>
-
-								</div>
-							</div>
-						</div>
-						<a href="#">
-							<div class="panel-footer">
-								<span class="pull-left">[ detalii 2 ]</span>
-								<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-								<div class="clearfix"></div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="panel panel-yellow">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="fa fa-plus-circle fa-5x"></i>
-								</div>
-								<div class="col-xs-9 text-right">
-									<div class="huge">[ buton 3]</div>
-									<div>[meniu 3]</div>
-								</div>
-							</div>
-						</div>
-						<a href="#">
-							<div class="panel-footer">
-								<span class="pull-left">[detalii 3]</span>
-								<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-								<div class="clearfix"></div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="panel panel-red">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="fa fa-exclamation-circle fa-5x"></i>
-								</div>
-								<div class="col-xs-9 text-right">
-									<div class="huge">[buton 4 ]</div>
-									<div>[meniu 4]</div>
-								</div>
-							</div>
-						</div>
-						<a href="#">
-							<div class="panel-footer">
-								<span class="pull-left">[detalii 4]</span>
-								<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-								<div class="clearfix"></div>
-							</div>
-						</a>
-					</div>
-				</div>
 				<?php } ?>
 			</div>
 			<div class="row">
@@ -161,13 +87,13 @@
 									<tbody>
 										<tr>
 											<td>1</td>
-											<td><strong><font color="green"><?php echo server_ip($_SESSION['username']); ?></font></strong></td>
+											<td><?php echo server_ip($_SESSION['username']); ?></td>
 											<td><?php if(!$offline) echo $remote->getKernel(); else echo 'Necunoscut'; ?></td>
 											<td><?php if (!$offline) echo $remote->uptime(); else echo '<font color="red">OFFLINE</font>'; ?></td>
-											<td><strong><font color="red"><?php if (!$offline) echo $remote->loadAvg(); else echo 0; ?></font></strong></td>
-											<td><strong><font color="orange"><?php if (!$offline) echo $remote->cpuUsage(); else echo '0%'; ?></font></strong></td>
-											<td><font color="grey" size="2"><?php if (!$offline) echo $remote->ramMemory(); else echo '0'; ?></font></td>
-											<td><strong><font color="green"><?php if (!$offline) echo $remote->freeSpace(); else echo '0'; ?>/<?php if (!$offline) echo $remote->totalSpace(); else echo '0'; ?></font></strong></td>
+											<td><?php if (!$offline) echo $remote->loadAvg(); else echo 0; ?></td>
+											<td><?php if (!$offline) echo $remote->cpuUsage(); else echo '0%'; ?></td>
+											<td><?php if (!$offline) echo $remote->ramMemory(); else echo '0'; ?></td>
+											<td><?php if (!$offline) echo $remote->freeSpace(); else echo '0'; ?>/<?php if (!$offline) echo $remote->totalSpace(); else echo '0'; ?></td>
 										</tr>
 
 
@@ -175,7 +101,6 @@
 
 								</table>
 							</div>
-							WARNING!&nbsp;&nbsp;<strong><font color="green">green</font></strong> - OK, &nbsp;&nbsp;<strong><font color="red">red</font></strong>  - critical, &nbsp;&nbsp;<strong><font color="orange">orange</font></strong> - attention!
 						</div>
 					</div>
 					<div class="panel panel-default">
@@ -184,17 +109,34 @@
 						</div>
 						<div class="panel-body">
 							<div class="table-responsive">
-							 <button type="button" class="btn btn-success">Boot</button>
-							 <?php
-								if (!$offline) {
-									echo '<a href="dashboard.php?action=restart"> <button type="button" class="btn btn-danger">Restart</button> </a>';
-								} else if ($offline || $action == "restart") {
-									echo '<button type="button" class="btn btn-danger disabled">Restart</button><img src="//lusioncp.me/assets/img/spin.gif" alt="Loading..." width="20" height="20">
-											<meta http-equiv="refresh" content="5; url=dashboard.php" />';
-								}
+							 <?php if(!$offline): ?>
+								<a href="dashboard.php?action=start"><button type="button" class="btn btn-success">Start</button></a>
+								<a href="dashboard.php?action=restart"><button type="button" class="btn btn-warning">Restart</button></a>
+								<a href="dashboard.php?action=reboot"><button type="button" class="btn btn-danger">Reboot</button></a>
+								<a href="dashboard.php?action=stop"><button type="button" class="btn btn-danger">Stop</button></a>
+								<a href="serverfiles.php?action=install"><button type="button" class="btn btn-warning">Reinstalare server</button></a>
+							<?php
+							else if ($offline || $action == "start"):
 							?>
-							<button type="button" class="btn btn-warning">Reinstalare Server</button>
+								<button type="button" class="btn btn-success disabled">Start</button><img src="https://www.lusioncp.me/assets/img/spin.gif" alt="Loading..." width="20" height="20">
+								<meta http-equiv="refresh" content="5; url=dashboard.php">
+							<?php
+							else if ($offline || $action == "restart"):
+							?>
+							<button type="button" class="btn btn-warning disabled">Restart</button><img src="https://www.lusioncp.me/assets/img/spin.gif" alt="Loading..." width="20" height="20">
+							<meta http-equiv="refresh" content="5; url=dashboard.php">
+							<?php
+							else if ($offline || $action == "restart"):
+							?>
+							<button type="button" class="btn btn-danger disabled">Reboot</button><img src="https://www.lusioncp.me/assets/img/spin.gif" alt="Loading..." width="20" height="20">
+							<meta http-equiv="refresh" content="5; url=dashboard.php">
+							<?php
+							else if ($offline || $action == "restart"):
+							?>
+							<button type="button" class="btn btn-danger disabled">Stop</button><img src="https://www.lusioncp.me/assets/img/spin.gif" alt="Loading..." width="20" height="20">
+							<meta http-equiv="refresh" content="5; url=dashboard.php">
 							</div>
+							<?php endif; ?>
 						</div>
 					</div>
 				</div>
