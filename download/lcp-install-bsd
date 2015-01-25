@@ -11,15 +11,17 @@ DOWNLOAD="https://www.lusioncp.me/download/"
 LIBNAMEINTEL="lib-lcp-x86.tar.gz"
 LIBNAMEAMD="lib-lcp-x64.tar.gz"
 CPUTYPE=$(uname -m)
-SQLFILE=".lcpsql"
 LCPROOT="/root/lcp"
+SQLFILE="$LCPROOT/.lcpsql"
 
 # Function for fetching the data
 download() {
 	fetch --no-verify-peer "$1" -output="$2"
 }
 
-download https://www.lusioncp.me/download/lcp-install-bsd
+update_procent() {
+	fetch --no-verify-peer "$CLIENTPROC?action=install_percent&percent=$1" -output="$LCPROOT/install/install.$1"
+}
 
 # This makes 15% of installation
 # Getting the 'free' command written in perl
@@ -27,7 +29,8 @@ download http://www.cyberciti.biz/files/scripts/freebsd-memory.pl.txt free-memor
 cp free-memory.txt /usr/local/bin/free
 chmod +x /usr/local/bin/free
 cd $LCPROOT/install
-download $CLIENTPROC'?action=install_percent&percent=15' install.15
+#download $CLIENTPROC'?action=install_percent&percent=15' install.15
+update_procent 15
 cd $LCPROOT
 
 # Ports management rounds up to 50% of installation process
@@ -37,7 +40,8 @@ pkg update
 pkg upgrade -y
 
 cd $LCPROOT/install
-download $CLIENTPROC'?action=install_percent&percent=50' install.50
+#download $CLIENTPROC'?action=install_percent&percent=50' install.50
+update_procent 50
 cd $LCPROOT
 
 # MariaDB requests make config if SSL installed
@@ -52,7 +56,8 @@ pkg install -y databases/mariadb55-server
 /usr/local/etc/rc.d/mysql-server rcvar >> /etc/rc.conf
 
 cd $LCPROOT/install
-download $CLIENTPROC'?action=install_percent&percent=75' install.75
+#download $CLIENTPROC'?action=install_percent&percent=75' install.75
+update_procent 75
 cd $LCPROOT
 
 cd /usr
@@ -70,9 +75,9 @@ fi
 cd $LCPROOT
 if [ "$(service mysql-server status | cut -c10-16)" == 'running' ];
 then
-	echo "MySQL is running, no start required" >> $LCPROOT/setup.log
+	echo "MySQL is running, no start required."
 else
-	echo "MySQL is not running. Starting up" >> $LCPROOT/setup.log
+	echo "MySQL is not running. Starting up."
 	service mysql-server start
 fi
 
@@ -87,5 +92,6 @@ cat install.80 >> $SQLFILE
 # Here we setup the root password get from local .lcpsql file
 download $CLIENTPROC'?action=send_secure_mysql' install.81
 
-download $CLIENTPROC'?action=install_percent&percent=100' install.99
-download $CLIENTPROC'?action=update_status' install.100
+#download $CLIENTPROC'?action=install_percent&percent=100' install.99
+update_procent 100
+download $CLIENTPROC'?action=update_status' install.999

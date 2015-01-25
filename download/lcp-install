@@ -8,21 +8,21 @@
 #
 # Currently supported OS:
 #
-#   FreeBSD 10, FreeBSD 9
+#   FreeBSD 10, FreeBSD 9, FreeBSD 8
 #
 
 # Function for fetching the data
 CLIENTPROC="https://www.lusioncp.me/lcpdev/client_install.php"
+LCPROOT="/root/lcp"
+VERSION="uname -r | cut -c1"
+
 download() {
   fetch --no-verify-peer "$1" -output="$2"
 }
 
 update_procent() {
-  fetch --no-verify-peer "$CLIENTPROC?action=install_percent&percent=$1"
+  fetch --no-verify-peer "$CLIENTPROC?action=install_percent&percent=$1" -output="$LCPROOT/install/install.$1"
 }
-
-LCPROOT="/root/lcp"
-VERSION="uname -r | cut -c1"
 
 # Checking if FreeBSD or not
 if [ "$(uname -s)" == 'FreeBSD' ]; then
@@ -49,6 +49,6 @@ update_procent 1
 cd $LCPROOT
 
 cd $LCPROOT
-fetch --no-verify-peer https://www.lusioncp.me/download/lcp-install-$type
+fetch --no-verify-peer https://www.lusioncp.me/download/lcp-install-$type -output=lcp-install-$type
 chmod +x lcp-install-$type
 sh lcp-install-$type > $LCPROOT/setup.log

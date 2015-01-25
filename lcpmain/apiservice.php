@@ -332,6 +332,22 @@ switch($action) {
 		}
 		break;
 
+	case 'get_company_url':
+		$query = "
+			SELECT
+				company_url
+			FROM
+				lcpa_license
+			WHERE
+				license_key = '{$get_ip}'
+		";
+		$data = $db->query($query);
+		if($data->num_rows == 1) {
+			echo $data->company_url;
+		} else {
+			echo 'invalid license';
+		}
+		break;
 	default:
 		echo 'invalid action';
 		break;
