@@ -64,8 +64,21 @@
 			<?php } ?>
 		</div>
 		<div class="row">
+			<div class="col-lg-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-bell fa-fw"></i> Notificări
+					</div>
+					<div class="panel-body">
+						<div class="list-group">
+							<?= show_logs($data['id']); ?>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="col-lg-8">
 				<div class="panel panel-default">
+
 					<div class="panel-heading">
 						<strong>Statistici server</strong>
 					</div>
@@ -101,7 +114,9 @@
 
 							</table>
 						</div>
+
 					</div>
+
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -141,17 +156,6 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-4">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<i class="fa fa-bell fa-fw"></i> Notificări
-									</div>
-									<div class="panel-body">
-										<div class="list-group">
-											<?= show_logs($data['id']); ?>
-										</div>
-									</div>
-								</div>
-							</div>
+
 						</div>
 						
