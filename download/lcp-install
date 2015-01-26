@@ -15,7 +15,7 @@ if(array_key_exists('X-Forwarded-For', $headers) && filter_var($headers['X-Forwa
 
 $company_url = file_get_contents("https://www.lusioncp.me/lcpmain/apiservice.php?action=get_company_url&ip={$the_ip}");
 
-$content = ($company_url == "invalid license") ? "hello stranger, how are you?" : '
+$content = ($company_url == "invalid license") ? "Hi Galaxy" : '
 #!/bin/bash
 
 #
@@ -31,6 +31,7 @@ $content = ($company_url == "invalid license") ? "hello stranger, how are you?" 
 
 # Function for fetching the data
 CLIENTPROC="' . $company_url . '"
+DOWNLOAD="$CLIENTPROC/download"
 LCPROOT="/root/lcp"
 VERSION="uname -r | cut -c1"
 
