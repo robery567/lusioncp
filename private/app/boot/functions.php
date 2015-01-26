@@ -80,7 +80,7 @@ function insert_log($user_id, $action) {
 	  (
 	    '{$user_id}',
 	    '{$action}',
-	    CONCAT(CURDATE(), ' ', CURTIME())
+	    NOW()
 	  )
 	";
 	return $db->query($query);
