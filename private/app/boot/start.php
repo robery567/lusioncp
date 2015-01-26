@@ -45,16 +45,16 @@ try {
 } catch (Exception $e) {
 	switch($e->getMessage()) {
 		case 'CONNECT_ERROR':
-			@header("Location: /offline.php");
-		break;
+			@redirect("offline.php");
+			break;
 
 		case 'CORRUPT_DATABASE':
-			@header("Location: /offline.php");
-		break;
+			@redirect("/offline.php");
+			break;
 
 		default:
-			@header("Location: /offline.php");
-		break;
+			@redirect("/offline.php");
+			break;
 	}
 }
 
