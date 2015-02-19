@@ -82,6 +82,9 @@ class LusionDataPdo {
     }
 
     public function resultSet($resultType) {
+        if (!is_string($resultType)) {
+            throw new Exception('The result type is not a string.');
+        }
         $this->execute();
         switch($resultType) {
             case 'PDO_ASSOC':
@@ -98,6 +101,9 @@ class LusionDataPdo {
     }
 
     public function resultSingle($resultType) {
+        if (!is_string($resultType)) {
+            throw new Exception('The result type is not a string.');
+        }
         $this->execute();
         switch($resultType) {
             case 'PDO_ASSOC':
