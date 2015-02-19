@@ -5,7 +5,7 @@
  * LusionDB Maintainer tools
  * @version 0.1a
  * 
- * /
+ */
 
 require_once __DIR__.'/../app/boot/functions.php';
 require_once __DIR__.'/../app/config/database.php';
