@@ -1,1 +1,0 @@
-user_id|i:1;username|s:7:"admtest";email|s:19:"admtest@lusioncp.me";server_ip|s:12:"185.12.7.241";shcmd|a:4:{s:3:"dir";s:5:"/root";s:4:"user";s:7:"admtest";s:6:"whoami";s:4:"root";s:4:"host";s:11:"freebsd10-0";}

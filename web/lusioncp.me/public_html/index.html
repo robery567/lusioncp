@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <![endif]-->
+    <title>LusionCP &mdash; în construcție</title>
+    <link href="assets1/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets1/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets1/scripts/vegas/jquery.vegas.min.css" rel="stylesheet" />
+    <link href="assets1/css/style.css" rel="stylesheet" />
+     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+    <!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    </head>
+<body>
+
+    <div class="loader"></div>
+
+    <div class="container-fluid">
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="https://www.lusioncp.me/" >LusionCP <i class="fa fa-plus"></i></a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a data-toggle="modal" data-target="#mAbout" href="#mHome">DESPRE</a></li>
+						<li><a data-toggle="modal" href="https://www.lusioncp.me/lcpdev/" target="_blank">DEMO</a></li>
+						<li><a data-toggle="modal" data-target="#mService" href="#mService">OFERTA</a></li>
+						<li><a data-toggle="modal" data-target="#mContributors" href="#mContributors">ECHIPA</a></li>
+						<li><a data-toggle="modal" data-target="#mContact" href="#myModal">CONTACT</a></li>
+					</ul>
+				</div>         
+			</div>
+		</div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 col-sm-12">
+                <div id="movingicon">
+					<i class="fa fa-refresh fa-spin icon-color"></i>
+					<div id="headLine"></div>
+                </div>
+            </div>
+            <div class="col-md-8 col-md-offset-2" >
+                <div id="counter-default" class="row">
+					<div>
+						<center><div class="timer-text">BETA TEST :: 26 IANUARIE 2015!</div></center>
+					</div>
+				</div>
+            </div>
+			<div class="col-md-6 col-md-offset-3">
+				<div class="social-links" >
+                    <a href="#"><i class="fa fa-facebook fa-4x"></i></a>
+                    <a href="#"><i class="fa fa-google-plus fa-4x"></i></a>
+                </div>
+			</div>
+        </div>
+    </div>
+    <div class="modal fade" id="mAbout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel1"> <i class="fa fa-plus"></i> DESPRE NOI </h4>
+				</div>
+				<div class="modal-body">
+					<div class="mian-popup-body" >
+						<h1> <span class="fa fa-flask "></span> Cine suntem?</h1>
+						<div class="row">
+							<p>
+								Suntem o organizație de programatori care a dezvoltat în cursul timpului mai multe proiecte, 
+								printre care și panoul de control <strong>LusionCP</strong>.
+							</p>
+
+							<h3><span class="fa fa-cog fa-spin "></span> Scopul nostru</h3>
+							<p>
+								Ne propunem să dezvoltăm aplicații ușoare de utilizat, atât pentru firmele de hosting, cât și pentru clienții acestora. 
+								Instalarea produselor noastre este foarte simplă și nu necesită librării externe.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary back-btn" data-dismiss="modal">Închide</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <div class="modal fade" id="mService" tabindex="-1" role="dialog" aria-labelledby="mService1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="mService1"> <i class="fa fa-plus"></i> SERVICIILE NOASTRE</h4>
+				</div>
+				<div class="modal-body">
+					<div class="mian-popup-body">
+						<h1> <span class="fa fa-thumbs-o-up "></span> Ce oferim?</h1>
+						<div class="row">
+							<p>
+								Oferim posibilitatea integrării unui panou de control al serverelor de Metin2 <strong>unic</strong> în România. 
+							</p>
+
+							<h3><span class="fa fa-cog fa-spin "></span> Posibilitate de control</h3>
+							<ul>
+								<li>Nu necesită niciun fel de instalare pe serverele clienților;</li>
+								<li>Posibilitatea resetării serverului la starea inițială;</li>
+								<li>Consolă de control al serverului;</li>
+								<li>Instalarea oricărui serverfiles dorit dintr-o listă existentă.</li>
+							</ul>
+                      
+							<h3><span class="fa fa-cog fa-spin "></span> Siguranță și business</h3>
+							<ul>
+								<li>Copie de siguranță la distanță (Cloud backup);</li>
+								<li>Copie de siguranță local;</li>
+								<li>Eliminarea accesului total asupra serverului;</li>
+							</ul>
+							<p>
+								Pentru funcții suplimentare, utilizați pagina de contact.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary back-btn" data-dismiss="modal">Închide</button>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    <div class="modal fade" id="mContact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel"> <i class="fa fa-plus"></i> CONTACT</h4>
+				</div>
+				<div class="modal-body">
+					<div class="mian-popup-body">
+						<h1><span class="fa fa-book "></span> E-mail</h1>
+							<div class="row">
+							<ul>
+								<li><strong>Gmail:</strong> lusioncp@gmail.com</li>
+								<li><strong>Yahoo!:</strong> lusioncp@yahoo.com</li>
+								<li><strong>Webmaster:</strong> webmaster@lusioncp.me</li>
+							</ul>
+							<h3><span class="fa fa-cog fa-spin "></span> Chat</h3>
+							<ul>
+								<li><strong>Skype:</strong>: lusioncp</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary back-btn" data-dismiss="modal">Închide</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="mContributors" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel"> <i class="fa fa-plus"></i> Echipa LusionCP</h4>
+				</div>
+				<div class="modal-body">
+					<div class="mian-popup-body">
+						<h1><span class="fa fa-user "></span> Contribuitori</h1>
+						<div class="row">
+							<p>
+								Persoanele care a pus bazele LusionCP și continuă să îl dezvolte în mod primar:
+							</p>
+							<ul>
+								<li><a href="https://github.com/robery567">Robert C.</a></li>
+								<li><a href="https://github.com/valkyrie92">Petru S.</a></li>
+							</ul>
+							<h3><span class="fa fa-cog fa-spin "></span> Dezvoltatori</h3>
+							<p>
+								Toți cei care se implică la dezvoltarea <a href="#">LusionCP Community Framework</a> <i class="fa fa-thumbs-o-up"></i>
+							</p>
+							<h3><span class="fa fa-cog fa-spin "></span> Mulțumiri</h3>
+							<p>
+								Fără acest furnizor , realizarea proiectului LusionCP nu ar fi fost posibilă.
+							</p>
+							<ul>
+								
+								<li>GitHub &mdash; web developer pack, version control &amp; project hosting</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary back-btn" data-dismiss="modal">Închide</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <script src="assets1/plugins/jquery-1.10.2.js"></script>
+    <script src="assets1/plugins/bootstrap.js"></script>
+    <script src="assets1/plugins/jquery.countdown.js"></script>
+    <script src="assets1/js/countdown.js"></script>
+    <script src="assets1/plugins/vegas/jquery.vegas.min.js"></script>
+    <script src="assets1/js/custom-image.js"></script>
+
+</body>
+</html>
